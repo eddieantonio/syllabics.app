@@ -5,18 +5,28 @@ var ws = new WebSocket(
 document.addEventListener('DOMContentLoaded', function () {
   var sroBox = document.getElementById('sro');
   var sylBox = document.getElementById('syl');
+
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
-    if (data.sro) {
-      sroBox.innerText = data.sro;
-    }
-    if (data.syl) {
-      sylBox.innerText = data.syl;
-    }
+    updateBoxes(data);
   };
 
-  ws.onopen = function() {
-    ws.send(JSON.stringify({sro: 'maskekosihk trail'}));
-    ws.send(JSON.stringify({syl: '→ ᒪᐢᑫᑯᓯᕽ  ᑎᕒᐁᕀᓬ'}));
-  };
+  sroBox.addEventListener('input', function (event) {
+    send({sro: event.target.value});
+  });
+
+  sylBox.addEventListener('input', function (event) {
+    send({syl: event.target.value});
+  });
+
+  function updateBoxes(data) {
+    if (data.sro)
+      sroBox.value = data.sro;
+    if (data.syl)
+      sylBox.value = data.syl;
+  }
+
+  function send(message) {
+    ws.send(JSON.stringify(message));
+  }
 });
