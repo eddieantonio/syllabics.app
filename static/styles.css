@@ -5,3 +5,20 @@ html {
     background-color: #f6f8fa;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI" ,Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
+
+.box label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: .5em;
+}
+
+.box textarea {
+    display: block;
+    font-size: 24pt;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.box {
+    margin: 1rem;
+}

@@ -11,10 +11,17 @@
   <main>
     <h1> crk_orthography demo </h1>
     <form>
-      <label for="sro"> SRO </label>
-      <textarea id="sro" autofocus></textarea>
-      <label for="syl"> Syllabics </label>
-      <textarea id="syl"></textarea>
+      <div class="box box-sro">
+        <label for="sro"> SRO </label>
+        <textarea id="sro" name="sro"
+          autofocus autocomplete=off>tân'si</textarea>
+      </div>
+
+      <div class="box box-sro">
+        <label for="syl"> Syllabics </label>
+        <textarea id="syl" name="syl"
+          autocomplete=off>ᑖᓂᓯ</textarea>
+      </div>
     </form>
     <small> crk_orthography version {{ library_version }} </small>
   </main>
