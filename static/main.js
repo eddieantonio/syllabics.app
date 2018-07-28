@@ -16,7 +16,8 @@
  */
 
 var ws = new WebSocket(
-  'ws://' + document.domain + ':' + location.port + '/ws'
+  (location.protocol == 'https:' ? 'wss' : 'ws') + '://' +
+  document.domain + ':' + location.port + '/ws'
 );
 
 document.addEventListener('DOMContentLoaded', function () {
