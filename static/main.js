@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', function () {
   var sroBox = document.getElementById('sro');
   var sylBox = document.getElementById('syl');
 
+  // Convert SRO as soon as the WebSocket is open.
+  ws.onopen = function() {
+    // XXX: send only the value of SRO to be converted.
+    send({sro: sroBox.value});
+  };
+
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
     updateBoxes(data);
@@ -48,3 +54,38 @@ document.addEventListener('DOMContentLoaded', function () {
     ws.send(JSON.stringify(message));
   }
 });
+
+window.getDefaultTextareaValue = function (name) {
+  var textarea = document.getElementById(name);
+  const defaults = {
+    sro: "tân'si",
+    syl: 'ᑖᓂᓯ'
+  };
+
+  if (name != 'sro' && name != 'syl') {
+    return;
+  }
+
+  let fragment = parseFragment();
+  if (fragment[name]) {
+    textarea.value = fragment[name];
+  } else {
+    textarea.value = defaults[name];
+  }
+
+  function parseFragment() {
+    var fragment = location.hash;
+    let [_, pairsText] = fragment.split('!', 2);
+    if (!pairsText) {
+      return {};
+    }
+
+    const pairs = {};
+    pairsText.split(';').forEach(pair => {
+      let [key, value] = pair.split(':', 2);
+      pairs[key] = decodeURIComponent(value);
+    });
+
+    return pairs;
+  }
+};
