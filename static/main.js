@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var ws = new WebSocket(
+var ws = new ReconnectingWebSocket(
   (location.protocol == 'https:' ? 'wss' : 'ws') + '://' +
   document.domain + ':' + location.port + '/ws'
 );
@@ -89,3 +89,4 @@ window.getDefaultTextareaValue = function (name) {
     return pairs;
   }
 };
+/*global ReconnectingWebSocket*/

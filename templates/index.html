@@ -5,6 +5,7 @@
   <title>crk_orthography demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="{{ url_for('static', filename='reconnecting-websocket.min.js') }}"></script>
   <script src="{{ url_for('static', filename='main.js') }}"></script>
 </head>
 <body>
@@ -12,7 +13,7 @@
     <h1> crk_orthography demo </h1>
     <form>
       <div class="box box-sro">
-        <label for="sro"> SRO </label>
+        <label for="sro"> <abbr title="standard Roman orthography">SRO</abbr> </label>
         <textarea id="sro" name="sro"
           autofocus autocomplete=off>tân'si</textarea>
         <script>getDefaultTextareaValue('sro')</script>
