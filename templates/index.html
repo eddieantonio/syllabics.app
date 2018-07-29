@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>crk_orthography demo</title>
+  <title>SRO ⇔ Syllabics converter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   <script src="{{ url_for('static', filename='reconnecting-websocket.min.js') }}"></script>
@@ -10,25 +10,46 @@
 </head>
 <body>
   <main>
-    <h1> crk_orthography demo </h1>
+    <h1>SRO ⇔ Syllabics converter</h1>
     <form>
       <div class="box box-sro">
         <label for="sro"> <abbr title="standard Roman orthography">SRO</abbr> </label>
-        <textarea id="sro" name="sro"
+        <textarea id="sro" name="sro" lang="crk"
           autofocus autocomplete=off>tân'si</textarea>
         <script>getDefaultTextareaValue('sro')</script>
       </div>
 
       <div class="box box-sro">
         <label for="syl"> Syllabics </label>
-        <textarea id="syl" name="syl"
+        <textarea id="syl" name="syl" lang="crk"
           autocomplete=off>ᑖᓂᓯ</textarea>
         <script>getDefaultTextareaValue('syl')</script>
       </div>
     </form>
-    <small> crk_orthography version {{ library_version }} </small>
+
   </main>
 
-  <a href="https://github.com/eddieantonio/crk_orthography"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+  <footer>
+    {% macro library() %}<code>crk_orthography</code>{% endmacro %}
+    <h2> What is this? </h2>
+    <p> This is an <strong>standard Roman orthography (SRO)</strong>
+    to <strong>syllabics</strong> converter for <strong>Plains Cree</strong>.
+    The converter is bidirectional: it can go from SRO to syllabics and back
+    again. It supports both circumflexes (âêîô) and macrons (āēīō). It also
+    supports the special
+    <a href="https://crk-orthography.readthedocs.io/en/stable/glossary.html#term-sandhi">Sandhi orthographical rule</a>.
+
+    <p> Behind the scenes, this is a demo of the
+    <a href="https://pypi.org/project/crk-orthography/">{{ library() }} Python library</a>,
+    which is
+    <a href="https://opensource.com/resources/what-open-source">free and open source</a>,
+    and <a href="https://github.com/eddieantonio/crk_orthography">available on GitHub</a>.
+    You can incorporate {{ library() }} into your own Python projects by
+    installing it with pip: <code>pip install crk_orthography</code>.
+
+    The version of the {{ library() }} library on demo here is
+    <strong>{{ library_version }}</strong>.
+
+  </footer>
 </body>
 </html>

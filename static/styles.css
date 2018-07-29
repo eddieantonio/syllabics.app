@@ -33,6 +33,16 @@ html {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI" ,Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
+a { color: #0366d6; }
+
+footer {
+    font-size: 9pt;
+    color: #444;
+}
+
+code { background-color: #eee; }
+a > code { background-color: inherit; }
+
 .box label {
     display: block;
     font-weight: bold;
@@ -46,6 +56,4 @@ html {
     margin: 0 auto;
 }
 
-.box {
-    margin: 1rem;
-}
+.box, footer { margin: 1rem; }
