@@ -35,21 +35,33 @@ async def hello():
 
 @app.websocket('/ws')
 async def ws():
+    """
+    A Websocket endpoint that calls the appropriate crk_orthography function.
+    """
     while True:
         data = await websocket.receive()
         await websocket.send(handle_request(data))
 
 
-def jsonify(fn):
-    def wrapped(raw_data, *args, **kwargs):
+def handle_request(raw_data):
+    if len(raw_data) > 1024:
+        return json.dumps({'error': 'message too long'})
+
+    try:
         parsed_data = json.loads(raw_data)
-        raw_response = fn(parsed_data, *args, **kwargs)
-        return json.dumps(raw_response)
-    return wrapped
+        raw_response = _handle_request(parsed_data)
+        response = json.dumps(raw_response)
+    except Exception:
+        app.logger.exception(f"Error on message {raw_data!r}")
+        return json.dumps({'error': 'bad message'})
+    else:
+        return response
 
 
-@jsonify
-def handle_request(data):
+def _handle_request(data):
+    """
+    Handles the actual request.
+    """
     if 'sro' in data:
         return {'syl': sro2syllabics(data['sro'])}
     elif 'syl' in data:
