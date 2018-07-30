@@ -16,7 +16,6 @@
  */
 
 (function () {
-
   var dirty = null;
   var ws = new ReconnectingWebSocket(
     (location.protocol == 'https:' ? 'wss' : 'ws') + '://' +
@@ -48,6 +47,21 @@
     sylBox.addEventListener('input', function (event) {
       send({syl: event.target.value});
     });
+
+    // Don't bother setting this handler if it doesn't exist.
+    if (!('onhashchange' in window))
+      return;
+
+    // Change the values when the /#!hash changes.
+    window.onhashchange = function () {
+      let pairs = parseFragment();
+      updateBoxes(pairs);
+      if ('sro' in pairs) {
+        sendSRO();
+      } else if ('syl' in pairs) {
+        sendSyllabics();
+      }
+    };
 
     function updateBoxes(data) {
       if (data.sro)
@@ -87,23 +101,23 @@
     } else {
       textarea.value = defaults[name];
     }
-
-    function parseFragment() {
-      var fragment = location.hash;
-      let [_, pairsText] = fragment.split('!', 2);
-      if (!pairsText) {
-        return {};
-      }
-
-      const pairs = {};
-      pairsText.split(';').forEach(pair => {
-        let [key, value] = pair.split(':', 2);
-        pairs[key] = decodeURIComponent(value);
-      });
-
-      return pairs;
-    }
   };
+
+  function parseFragment() {
+    var fragment = location.hash;
+    let [_, pairsText] = fragment.split('!', 2);
+    if (!pairsText) {
+      return {};
+    }
+
+    const pairs = {};
+    pairsText.split(';').forEach(pair => {
+      let [key, value] = pair.split(':', 2);
+      pairs[key] = decodeURIComponent(value);
+    });
+
+    return pairs;
+  }
 
 }());
 /*global ReconnectingWebSocket*/
