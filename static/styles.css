@@ -54,9 +54,38 @@ a > code { background-color: inherit; }
 
 .box textarea {
     display: block;
-    font-size: 24pt;
+    box-sizing: border-box;
     width: 100%;
     margin: 0 auto;
+    font-size: 24pt;
 }
 
-.box, footer { margin: 1rem; }
+.box {
+    margin: 1rem auto;
+}
+
+main, footer { margin: 1rem; }
+
+summary {
+    padding: 5px;
+    border-radius: 4px;
+
+    background-color: #f6f8fa;
+    box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0.1),
+                inset 1px 1px 2px rgba(255, 255, 255, 0.1);
+
+    cursor: pointer;
+}
+
+summary + fieldset {
+    border: none;
+    margin: -4px 0 0;
+    padding-top: 8px;
+    background-color: #d8d8e0;
+    border-radius: 0 0 2px 2px;
+    padding-bottom: 1em;
+    box-shadow: inset 1px 3px 1px rgba(0,0,0, 0.1);
+    z-index: -5;
+}
+
+fieldset > label { display: inline-block; }
