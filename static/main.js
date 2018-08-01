@@ -46,6 +46,11 @@
     sroBox.addEventListener('input', () => sendSRO());
     sylBox.addEventListener('input', () => sendSyllabics());
 
+    // Also, when somebody hits the macron switch.
+    for (let button of macronButtons) {
+      button.addEventListener('input', () => sendSyllabics());
+    }
+
     // Don't bother setting this handler if it doesn't exist.
     if (!('onhashchange' in window))
       return;
@@ -69,11 +74,8 @@
     }
 
     function shouldProduceMacrons() {
-      for (let button of macronButtons) {
-        if (button.checked && button.value == 'true')
-          return true;
-      }
-      return false;
+      let button = document.querySelector('input[name="macrons"]:checked');
+      return button.value == 'true';
     }
 
     function sendSRO() {
@@ -124,6 +126,5 @@
 
     return pairs;
   }
-
 }());
 /*global ReconnectingWebSocket*/
