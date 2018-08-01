@@ -65,7 +65,8 @@ def _handle_request(data):
     if 'sro' in data:
         return {'syl': sro2syllabics(data['sro'])}
     elif 'syl' in data:
-        return {'sro': syllabics2sro(data['syl'])}
+        macrons = bool(data.get('macrons'))
+        return {'sro': syllabics2sro(data['syl'], produce_macrons=macrons)}
     else:
         return {'error': 'invalid request'}
 

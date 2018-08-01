@@ -25,6 +25,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     var sroBox = document.getElementById('sro');
     var sylBox = document.getElementById('syl');
+    var macronButtons = document.getElementsByName('macrons');
 
     // Convert "dirty" changes soon as the WebSocket is open.
     ws.onopen = function() {
@@ -40,13 +41,10 @@
       updateBoxes(data);
     };
 
-    sroBox.addEventListener('input', function (event) {
-      send({sro: event.target.value});
-    });
-
-    sylBox.addEventListener('input', function (event) {
-      send({syl: event.target.value});
-    });
+    // Send the appropriate request when the user types or pastes into the SRO
+    // or syllabics boxes, respectively.
+    sroBox.addEventListener('input', () => sendSRO());
+    sylBox.addEventListener('input', () => sendSyllabics());
 
     // Don't bother setting this handler if it doesn't exist.
     if (!('onhashchange' in window))
@@ -70,12 +68,20 @@
         sylBox.value = data.syl;
     }
 
+    function shouldProduceMacrons() {
+      for (let button of macronButtons) {
+        if (button.checked && button.value == 'true')
+          return true;
+      }
+      return false;
+    }
+
     function sendSRO() {
       send({sro: sroBox.value});
     }
 
     function sendSyllabics() {
-      send({syl: sylBox.value});
+      send({syl: sylBox.value, macrons: shouldProduceMacrons()});
     }
 
     function send(message) {
