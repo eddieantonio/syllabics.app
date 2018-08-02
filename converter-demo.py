@@ -19,7 +19,7 @@
 
 import json
 
-from quart import Quart, websocket, render_template
+from quart import Quart, websocket, render_template, url_for
 from crk_orthography import (
     sro2syllabics, syllabics2sro, __version__ as library_version
 )
@@ -69,6 +69,11 @@ def _handle_request(data):
         return {'sro': syllabics2sro(data['syl'], produce_macrons=macrons)}
     else:
         return {'error': 'invalid request'}
+
+
+@app.template_filter('static_url')
+def static_url(filename):
+    return url_for('static', filename=filename)
 
 
 if __name__ == '__main__':
