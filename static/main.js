@@ -54,10 +54,6 @@
       });
     }
 
-    // Don't bother setting this handler if it doesn't exist.
-    if (!('onhashchange' in window))
-      return;
-
     // Change the values when the /#!hash changes.
     window.onhashchange = function () {
       var pairs = parseFragment();
