@@ -43,12 +43,15 @@
 
     // Send the appropriate request when the user types or pastes into the SRO
     // or syllabics boxes, respectively.
-    sroBox.addEventListener('input', () => sendSRO());
-    sylBox.addEventListener('input', () => sendSyllabics());
+    sroBox.addEventListener('input', function () { sendSRO(); });
+    sylBox.addEventListener('input', function () { sendSyllabics(); });
 
-    // Also, when somebody hits the macron switch.
-    for (let button of macronButtons) {
-      button.addEventListener('input', () => sendSyllabics());
+    // Send a request when somebody hits the macron/circumflex switch.
+    for (var i = 0; i < macronButtons.length; i++) {
+      var button = macronButtons[i];
+      button.addEventListener('input', function() {
+        sendSyllabics();
+      });
     }
 
     // Don't bother setting this handler if it doesn't exist.
@@ -57,7 +60,7 @@
 
     // Change the values when the /#!hash changes.
     window.onhashchange = function () {
-      let pairs = parseFragment();
+      var pairs = parseFragment();
       updateBoxes(pairs);
       if ('sro' in pairs) {
         sendSRO();
@@ -74,7 +77,7 @@
     }
 
     function shouldProduceMacrons() {
-      let button = document.querySelector('input[name="macrons"]:checked');
+      var button = document.querySelector('input[name="macrons"]:checked');
       return button.value == 'true';
     }
 
@@ -93,7 +96,7 @@
 
   window.getDefaultTextareaValue = function (name) {
     var textarea = document.getElementById(name);
-    const defaults = {
+    var defaults = {
       sro: "tân'si",
       syl: 'ᑖᓂᓯ'
     };
@@ -102,7 +105,7 @@
       return;
     }
 
-    let fragment = parseFragment();
+    var fragment = parseFragment();
     if (fragment[name]) {
       dirty = name;
       textarea.value = fragment[name];
@@ -113,14 +116,14 @@
 
   function parseFragment() {
     var fragment = location.hash;
-    let [_, pairsText] = fragment.split('!', 2);
+    var pairsText = fragment.split('!', 2)[1];
     if (!pairsText) {
       return {};
     }
 
-    const pairs = {};
-    pairsText.split(';').forEach(pair => {
-      let [key, value] = pair.split(':', 2);
+    var pairs = {};
+    pairsText.split(';').forEach(function (pair) {
+      var _pair = pair.split(':', 2), key = _pair[0], value = _pair[1];
       pairs[key] = decodeURIComponent(value);
     });
 
