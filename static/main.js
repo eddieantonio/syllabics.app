@@ -17,10 +17,11 @@
 
 (function () {
   var dirty = null;
-  var ws = new ReconnectingWebSocket(
-    (location.protocol == 'https:' ? 'wss' : 'ws') + '://' +
-    document.domain + ':' + location.port + '/ws'
-  );
+  var isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
+  var wsURL = (location.protocol == 'https:' ? 'wss' : 'ws') + '://' +
+               document.domain + ':' + location.port + '/ws';
+  var WSImplementation = isIE11 ? WebSocket : ReconnectingWebSocket;
+  var ws = new WSImplementation(wsURL);
 
   document.addEventListener('DOMContentLoaded', function () {
     var sroBox = document.getElementById('sro');
