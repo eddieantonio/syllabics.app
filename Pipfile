@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 quart = "*"
-crk-orthography = "==0.20180820.0"
+crk-orthography = "==0.20180820.1"
 
 [dev-packages]
 
