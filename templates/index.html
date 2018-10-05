@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Cree SRO ⇔ Syllabics converter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A standard Roman orthography (SRO) to syllabics converter for Plains Cree">
+  <meta name="description" content="A standard Roman orthography (SRO) to syllabics converter for Cree (Y- and Th- dialect)">
   <link rel="stylesheet" href="{{ 'styles.css' | static_url }}">
   <script src="{{ 'reconnecting-websocket.min.js' | static_url }}"></script>
   <script src="{{ 'main.js' | static_url }}"></script>
@@ -15,7 +15,7 @@
 </head>
 <body>
   <main>
-    <h1>SRO ⇔ Syllabics converter</h1>
+    <h1>Cree SRO ⇔ Syllabics converter</h1>
     <form>
       <div class="box box-sro">
         <label for="sro"> <abbr title="standard Roman orthography">SRO</abbr> </label>
@@ -54,7 +54,8 @@
     {% macro library() %}<code>crk_orthography</code>{% endmacro %}
     <h2> What is this? </h2>
     <p> This is a <strong>standard Roman orthography (SRO)</strong>
-    to <strong>syllabics</strong> converter for <strong>Plains Cree</strong>.
+    to <strong>syllabics</strong> converter for <strong>Cree</strong>
+    (Y-dialect and Th-dialect).
     Type the text you want to convert in the appropriately labelled box, and
     the result should appear in the other box automatically as you type!  The
     converter is bidirectional: it can go from SRO to syllabics and back
