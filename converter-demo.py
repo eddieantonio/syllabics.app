@@ -20,7 +20,7 @@
 import json
 
 from quart import Quart, websocket, render_template, url_for
-from crk_orthography import (
+from cree_sro_syllabics import (
     sro2syllabics, syllabics2sro, __version__ as library_version
 )
 
@@ -36,7 +36,7 @@ async def hello():
 @app.websocket('/ws')
 async def ws():
     """
-    A Websocket endpoint that calls the appropriate crk_orthography function.
+    A Websocket endpoint that calls the appropriate cree_sro_syllabics function
     """
     while True:
         data = await websocket.receive()

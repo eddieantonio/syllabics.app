@@ -1,4 +1,4 @@
-Demo for [eddieantonio/crk_orthography]
+Demo for [eddieantonio/cree-sro-syllabics]
 =======================================
 
-[eddieantonio/crk_orthography]: https://github.com/eddieantonio/crk_orthography
+[eddieantonio/cree-sro-syllabics]: https://github.com/eddieantonio/cree-sro-syllabics
