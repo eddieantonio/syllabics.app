@@ -29,4 +29,9 @@ markdown: kramdown
 exclude:
   - README.md
   - LICENSE
+  - Makefile
   - node_modules
+  - package.json
+  - package-lock.json
+  - dist
+  - .cache
