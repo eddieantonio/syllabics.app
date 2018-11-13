@@ -16,31 +16,20 @@
  */
 
 (function () {
-  var dirty = null;
-  var wsURL = (location.protocol == 'https:' ? 'wss' : 'ws') + '://' +
-    document.domain +
-    (location.port ? ':' + location.port : '') +
-    '/ws';
-  var ws = new ReconnectingWebSocket(wsURL);
+  var CreeSROSyllabics = require('cree-sro-syllabics');
 
+  var dirty = null;
   document.addEventListener('DOMContentLoaded', function () {
     var sroBox = document.getElementById('sro');
     var sylBox = document.getElementById('syl');
     var macronButtons = document.getElementsByName('macrons');
 
-    // Convert "dirty" changes soon as the WebSocket is open.
-    ws.onopen = function() {
-      if (dirty == 'sro') {
-        sendSRO();
-      } else if (dirty == 'syl') {
-        sendSyllabics();
-      }
-    };
-
-    ws.onmessage = function (event) {
-      var data = JSON.parse(event.data);
-      updateBoxes(data);
-    };
+    // Convert "dirty" changes soon as the page is loaded.
+    if (dirty == 'sro') {
+      sendSRO();
+    } else if (dirty == 'syl') {
+      sendSyllabics();
+    }
 
     // Send the appropriate request when the user types or pastes into the SRO
     // or syllabics boxes, respectively.
@@ -79,15 +68,18 @@
     }
 
     function sendSRO() {
-      send({sro: sroBox.value});
+      send({ syl: CreeSROSyllabics.sro2syllabics(sroBox.value) });
     }
 
     function sendSyllabics() {
-      send({syl: sylBox.value, macrons: shouldProduceMacrons()});
+      var sro = CreeSROSyllabics.syllabics2sro(sylBox.value, {
+        longAccents: shouldProduceMacrons() ? 'macrons'  : 'circumflexes'
+      });
+      send({ sro: sro });
     }
 
     function send(message) {
-      ws.send(JSON.stringify(message));
+      updateBoxes(message);
     }
   });
 
@@ -127,4 +119,3 @@
     return pairs;
   }
 }());
-/*global ReconnectingWebSocket*/
