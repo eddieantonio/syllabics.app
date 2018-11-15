@@ -17,6 +17,7 @@
 
 (function () {
   var CreeSROSyllabics = require('cree-sro-syllabics');
+  window.CREE_SRO_SYLLABICS_VERSION = CreeSROSyllabics.version.toString();
 
   var dirty = null;
   document.addEventListener('DOMContentLoaded', function () {
