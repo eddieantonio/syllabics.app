@@ -1,5 +1,4 @@
-_site
-.sass-cache
-.jekyll-metadata
-dist
-.cache
+node_modules/
+# Parcel stuff
+dist/
+.cache/
