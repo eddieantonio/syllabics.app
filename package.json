@@ -4,7 +4,7 @@
   "description": "Demo for eddieantonio/cree-sro-syllabics",
   "main": "main.js",
   "dependencies": {
-    "cree-sro-syllabics": "^2018.11.13"
+    "cree-sro-syllabics": "^2018.11.23"
   },
   "devDependencies": {
     "parcel-bundler": "^1.10.3"

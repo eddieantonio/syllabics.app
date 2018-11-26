@@ -1,4 +1,7 @@
+# Node/npm stuff
 node_modules/
+npm-debug.log*
+
 # Parcel stuff
 dist/
 .cache/
