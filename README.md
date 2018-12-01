@@ -18,9 +18,9 @@ This app builds using [Parcel]. To build, use the following:
 
 This bundles the site to `dist/`.
 
-When I'm developing, I use Parcel in watch mode:
+When I'm developing, I use Parcel in serve mode:
 
-    npx parcel watch index.html
+    npx parcel serve index.html
 
 This starts a development server at <http://localhost:1234/> that
 automatically reloads when files change.
