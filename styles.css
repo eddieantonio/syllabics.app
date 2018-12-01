@@ -89,3 +89,8 @@ summary + fieldset {
 }
 
 fieldset > label { display: inline-block; }
+
+@media (max-width: 400px) {
+    h1 { font-size: 1.25rem }
+    .hide-phone { display: none }
+}
