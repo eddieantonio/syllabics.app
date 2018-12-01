@@ -10,7 +10,7 @@
     "parcel-bundler": "^1.10.3"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "now-build": "parcel build index.html"
   },
   "author": "",
   "license": "AGPL-3.0"
