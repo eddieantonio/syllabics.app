@@ -36,15 +36,21 @@ html, textarea {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI" ,Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-a { color: #0366d6; }
+a {
+    color: #0366d6;
+}
 
 footer {
     font-size: 9pt;
     color: #444;
 }
 
-code { background-color: #eee; }
-a > code { background-color: inherit; }
+code {
+    background-color: #eee;
+}
+a > code {
+    background-color: inherit;
+}
 
 .box label {
     display: block;
@@ -57,6 +63,7 @@ a > code { background-color: inherit; }
     box-sizing: border-box;
     width: 100%;
     margin: 0 auto;
+    padding: 2px .25em;
     font-size: 24pt;
 }
 
@@ -64,7 +71,9 @@ a > code { background-color: inherit; }
     margin: 1rem auto;
 }
 
-main, footer { margin: 1rem; }
+main, footer {
+    margin: 1rem;
+}
 
 summary {
     padding: 5px;
@@ -88,9 +97,22 @@ summary + fieldset {
     z-index: -5;
 }
 
-fieldset > label { display: inline-block; }
+fieldset > label {
+    display: inline-block;
+}
 
-@media (max-width: 400px) {
-    h1 { font-size: 1.25rem }
-    .hide-phone { display: none }
+/* Mobile-S size: max-width: 320px; */
+/* Mobile-M size: */
+@media (max-width: 375px) {
+    h1 {
+        font-size: 1.25rem;
+    }
+
+    .hide-phone {
+        display: none;
+    }
+
+    .box textarea {
+        min-height: 5.5ex;
+    }
 }
