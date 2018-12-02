@@ -1,10 +1,15 @@
 {
   "name": "syllabics.app",
-  "version": "2018.11.13",
-  "description": "Demo for eddieantonio/cree-sro-syllabics",
-  "main": "main.js",
+  "version": "latest",
+  "author": "Eddie Antonio Santos <easantos@ualberta.ca>",
+  "description": "Western Cree SRO/Syllabics conversion app",
+  "private": true,
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/eddieantonio/syllabics.app.git"
+  },
   "dependencies": {
-    "cree-sro-syllabics": "^2018.12.1"
+    "cree-sro-syllabics": "^2018.12.2"
   },
   "devDependencies": {
     "parcel-bundler": "^1.10.3"
@@ -12,6 +17,5 @@
   "scripts": {
     "now-build": "parcel build index.html"
   },
-  "author": "",
   "license": "AGPL-3.0"
 }
