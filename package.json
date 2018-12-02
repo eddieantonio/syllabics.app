@@ -1,6 +1,6 @@
 {
   "name": "syllabics.app",
-  "version": "latest",
+  "version": "2018.12.2",
   "author": "Eddie Antonio Santos <easantos@ualberta.ca>",
   "description": "Western Cree SRO/Syllabics conversion app",
   "private": true,
