@@ -9,17 +9,18 @@
     "url": "https://github.com/eddieantonio/syllabics.app.git"
   },
   "dependencies": {
-    "cree-sro-syllabics": "^2018.12.7"
+    "cree-sro-syllabics": "^2018.12.7",
+    "cypress": "^3.1.4",
+    "wait-on": "^3.2.0"
   },
   "devDependencies": {
-    "cypress": "^3.1.4",
-    "parcel-bundler": "^1.10.3",
-    "wait-on": "^3.2.0"
+    "parcel-bundler": "^1.10.3"
   },
   "scripts": {
     "now-build": "parcel build index.html",
     "start": "parcel serve index.html",
-    "test": "cypress run"
+    "test": "cypress run",
+    "install:test": "npm install 'cypress@^3.1.4' 'wait-on@^3.2.0'"
   },
   "license": "AGPL-3.0"
 }
