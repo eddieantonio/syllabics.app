@@ -29,6 +29,35 @@ When I'm developing, I use Parcel in serve mode:
 This starts a development server at <http://localhost:1234/> that
 automatically reloads when files change.
 
+Test
+----
+
+This project uses browser tests written in [Cypress][].
+
+To install test dependencies, run:
+
+    npm run install:test
+
+This installs Cypress (very large dependency), and does **NOT** add it
+to `package-lock.json`.
+
+> **NOTE**: Cypress must NEVER be included in `package-lock.json`,
+> because its file size exceeds the limits of Now's free plan (100MiB per file
+> limit). Now will install everything in `package-lock.json`, which
+> includes Cypress. Cypress is never used, and it **breaks the Now
+> build**. As such, it must be installed separately, skipping
+> `package-lock.json`.
+
+To interactively run tests, open Cypress:
+
+    cypress open
+
+Add tests to `cypress/integration/`. See Cypress's docs for more help.
+
+
+[Cypress]: https://www.cypress.io/
+
+
 Deploy
 ------
 
