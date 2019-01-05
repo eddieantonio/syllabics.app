@@ -64,20 +64,6 @@
         lastVowel = null;
       }
 
-      function longVowelOf(vowel) {
-        if (vowel === 'e') {
-          return 'ê';
-        } else if (vowel === 'i') {
-          return 'î';
-        } else if (vowel === 'o') {
-          return 'ô';
-        } else if (vowel === 'a') {
-          return 'â'
-        } else {
-          throw new RangeError('Invalid long vowel: ' + vowel);
-        }
-      }
-    });
 
     // Send the appropriate request when the user types or pastes into the SRO
     // or syllabics boxes, respectively.
@@ -138,6 +124,22 @@
       // "ArrowRight", instead of a single character.
       return !event.key || event.key.length > 1;
     }
+
+    // Return the long version of a short vowel.
+    function longVowelOf(vowel) {
+      if (vowel === 'e') {
+        return 'ê';
+      } else if (vowel === 'i') {
+        return 'î';
+      } else if (vowel === 'o') {
+        return 'ô';
+      } else if (vowel === 'a') {
+        return 'â'
+      } else {
+        throw new RangeError('Invalid long vowel: ' + vowel);
+      }
+    }
+    });
   });
 
   window.getDefaultTextareaValue = function (name) {
