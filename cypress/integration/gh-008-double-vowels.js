@@ -43,5 +43,28 @@ describe('Double typing for long vowels', function () {
       .should('contain', insertedText);
   });
 
-  it.skip('can be disabled');
+  it('can be disabled', function () {
+    cy.get('[data-cy="option-double-vowels"]').as('checkbox');
+    cy.get('textarea#sro').as('sro');
+
+    // With the checkbox enabled...
+    cy.get('@checkbox')
+      .check();
+    // ...there SHOULD be a change.
+    cy.get('@sro')
+      .clear()
+      .type('eetii')
+      .invoke('val')
+      .should('equal', 'êtî')
+
+    // However, when we uncheck the option...
+    cy.get('@checkbox')
+      .uncheck();
+    // ...there should be NO change in the long vowels:
+    cy.get('@sro')
+      .clear()
+      .type('eetii')
+      .invoke('val')
+      .should('equal', 'eetii')
+  });
 });
