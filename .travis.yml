@@ -9,4 +9,4 @@ install:
   - npm ci
 script:
   - npm start & $(npm bin)/wait-on http://localhost:1234
-  - $(npm bin)/cypress run
+  - $(npm bin)/cypress run --record
