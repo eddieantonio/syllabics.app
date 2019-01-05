@@ -38,7 +38,7 @@
       </div>
 
       <details>
-        <summary>Settings</summary>
+        <summary data-cy="settings-drop-down">Settings</summary>
 
         <fieldset class="extra-controls">
           <label>
@@ -49,6 +49,11 @@
           <label>
             <input type="radio" name="macrons" value="true">
             Produce macrons (āēīō)
+          </label>
+
+          <label>
+            <input type="checkbox" name="double-vowels" value="true" data-cy="option-double-vowels">
+            Type a vowel twice to type a long vowel (aa → â)
           </label>
         </fieldset>
       </details>

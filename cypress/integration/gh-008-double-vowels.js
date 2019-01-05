@@ -47,6 +47,9 @@ describe('Double typing for long vowels', function () {
     cy.get('[data-cy="option-double-vowels"]').as('checkbox');
     cy.get('textarea#sro').as('sro');
 
+    cy.get('[data-cy="settings-drop-down"]')
+      .click();
+
     // With the checkbox enabled...
     cy.get('@checkbox')
       .check();
