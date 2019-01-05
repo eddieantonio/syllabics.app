@@ -24,7 +24,7 @@
     var sroBox = document.getElementById('sro');
     var sylBox = document.getElementById('syl');
     var macronButtons = document.getElementsByName('macrons');
-    var lastVowel = null;
+    var previousSROText = sroBox.value;
 
     // Convert "dirty" changes soon as the page is loaded.
     if (dirty == 'sro') {
@@ -34,36 +34,56 @@
     }
 
     // Add a long vowel when double-pressing a vowel.
-    // NOTE: this code is bad :C
-    sroBox.addEventListener('keydown', function (event) {
-      var key = event.key;
-      var textarea;
-      var sroText;
-      var prefix;
+    sroBox.addEventListener('input', function (event) {
+      var newSROText = sroBox.value;
+      var differentAt;
+      var addedChar;
+      var commonPrefix;
+      var newString;
 
-      if (isIgnorableKey(event)) {
-        return;
+      // Check if exactly one character has been ADDED.
+      // Only then can we check whether we want a long vowel.
+      if (newSROText.length === previousSROText.length + 1) {
+        differentAt = whereDiffer(previousSROText, newSROText);
+        console.assert(newSROText.substr(0, differentAt) ===
+                       previousSROText.substr(0, differentAt));
+        commonPrefix = previousSROText.substr(0, differentAt);
+        addedChar = newSROText[differentAt];
+
+        // Check if a vowel has been doubled.
+        if (isSROShortVowel(addedChar) && lastCharOf(commonPrefix) === addedChar) {
+          // Pretend we never typed the second vowel; instead, add the long
+          // vowel to the buffer.
+          event.preventDefault();
+          // Construct new string by chopping off the short vowel from the
+          // common prefix, and chopping off the end of the previous buffer.
+          newString = commonPrefix.substr(0, commonPrefix.length - 1)
+            + longVowelOf(addedChar)
+            + previousSROText.substr(differentAt);
+          previousSROText = event.target.value = newString;
+          return;
+        }
       }
 
-      if (key === lastVowel) {
-        // Do not insert the second vowel; instead...
-        event.preventDefault();
-        textarea = event.target
-        sroText = textarea.value;
-        prefix = sroText.substr(0, sroText.length - 1)
-        textarea.value =
-           prefix + longVowelOf(lastVowel);
-
-        // Reset state to before a vowel was pressed.
-        lastVowel = null;
-        return;
-      } else if (isSROShortVowel(key)) {
-        // Match vowels only
-        lastVowel = key;
-      } else {
-        lastVowel = null;
-      }
+      previousSROText = newSROText;
     });
+
+    function lastCharOf(string) {
+      return string[string.length - 1];
+    }
+
+    function whereDiffer(prev, current) {
+      var i;
+      console.assert(prev.length + 1 === current.length);
+      for (i = 0; i < prev.length; i++) {
+        if (prev[i] !== current[i]) {
+          return i;
+        }
+      }
+      // They must differ at the last position!
+      return i;
+    }
+
 
     // Send the appropriate request when the user types or pastes into the SRO
     // or syllabics boxes, respectively.
