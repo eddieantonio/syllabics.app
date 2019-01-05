@@ -23,6 +23,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     var sroBox = document.getElementById('sro');
     var sylBox = document.getElementById('syl');
+    var doubledVowelCheckbox = document.getElementsByName('double-vowels')[0];
     var macronButtons = document.getElementsByName('macrons');
     var previousSROText = sroBox.value;
 
@@ -40,6 +41,10 @@
       var addedChar;
       var commonPrefix;
       var newString;
+
+      if (!doubledVowelCheckbox.checked) {
+        return;
+      }
 
       // Check if exactly one character has been ADDED.
       // Only then can we check whether we want a long vowel.
