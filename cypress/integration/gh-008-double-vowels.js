@@ -7,11 +7,15 @@ describe('Double typing for long vowels', function () {
 
     cy.get('textarea#sro')
       .clear()
-      .type("eetii niiya, ekwa oohoo niciihkeyimaaw");
+      .type('eetii niiya, eekwa oohoo niciihkeeyimaaw.');
+
+    cy.get('textarea#syl')
+      .invoke('val')
+      .should('equal', 'ᐁᑏ ᓃᔭ, ᐁᑿ ᐆᐦᐆ ᓂᒌᐦᑫᔨᒫᐤ᙮')
 
     cy.get('textarea#sro')
       .invoke('val')
-      .should('equal', 'ᐁᑏ ᓃᔭ, ᐁᑿ ᐆᐦᐆ ᓂᒌᐦᑫᔨᒫᐤ')
+      .should('contain', 'êtî nîya, êkwa ôhô nicîhkêyimâw.');
   });
 
   it.skip('should not affect pasted text');
