@@ -24,6 +24,7 @@
     var sroBox = document.getElementById('sro');
     var sylBox = document.getElementById('syl');
     var macronButtons = document.getElementsByName('macrons');
+    var lastVowel = null;
 
     // Convert "dirty" changes soon as the page is loaded.
     if (dirty == 'sro') {
@@ -32,9 +33,57 @@
       sendSyllabics();
     }
 
+    // Add a long vowel when double-pressing a vowel.
+    // NOTE: this code is bad :C
+    sroBox.addEventListener('keydown', function (event) {
+      var key = event.key;
+      var textarea;
+      var sroText;
+      var prefix;
+
+      if (isIgnorableKey(event)) {
+        return;
+      }
+
+      if (key === lastVowel) {
+        // Do not insert the second vowel; instead...
+        event.preventDefault();
+        textarea = event.target
+        sroText = textarea.value;
+        prefix = sroText.substr(0, sroText.length - 1)
+        textarea.value =
+           prefix + longVowelOf(lastVowel);
+
+        // Reset state to before a vowel was pressed.
+        lastVowel = null;
+        return;
+      } else if (key === 'e' || key === 'i' || key === 'o' || key === 'a') {
+        // Match vowels only
+        lastVowel = key;
+      } else {
+        lastVowel = null;
+      }
+
+      function longVowelOf(vowel) {
+        if (vowel === 'e') {
+          return 'ê';
+        } else if (vowel === 'i') {
+          return 'î';
+        } else if (vowel === 'o') {
+          return 'ô';
+        } else if (vowel === 'a') {
+          return 'â'
+        } else {
+          throw new RangeError('Invalid long vowel: ' + vowel);
+        }
+      }
+    });
+
     // Send the appropriate request when the user types or pastes into the SRO
     // or syllabics boxes, respectively.
-    sroBox.addEventListener('input', function () { sendSRO(); });
+    sroBox.addEventListener('input', function () {
+      sendSRO();
+    });
     sylBox.addEventListener('input', function () { sendSyllabics(); });
 
     // Send a request when somebody hits the macron/circumflex switch.
@@ -81,6 +130,13 @@
 
     function send(message) {
       updateBoxes(message);
+    }
+
+    function isIgnorableKey(event) {
+      // if event.key is missing...?
+      // OR if event.key is something like "Space", "Meta", or something like
+      // "ArrowRight", instead of a single character.
+      return !event.key || event.key.length > 1;
     }
   });
 
