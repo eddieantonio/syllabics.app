@@ -57,13 +57,13 @@
         // Reset state to before a vowel was pressed.
         lastVowel = null;
         return;
-      } else if (key === 'e' || key === 'i' || key === 'o' || key === 'a') {
+      } else if (isSROShortVowel(key)) {
         // Match vowels only
         lastVowel = key;
       } else {
         lastVowel = null;
       }
-
+    });
 
     // Send the appropriate request when the user types or pastes into the SRO
     // or syllabics boxes, respectively.
@@ -139,7 +139,10 @@
         throw new RangeError('Invalid long vowel: ' + vowel);
       }
     }
-    });
+
+    function isSROShortVowel(letter) {
+      return letter === 'e' || letter === 'i' || letter === 'o' || letter === 'a';
+    }
   });
 
   window.getDefaultTextareaValue = function (name) {
