@@ -36,8 +36,10 @@
         <script>getDefaultTextareaValue('syl')</script>
       </div>
 
-      <details>
-        <summary>Settings</summary>
+      <details id="settings">
+        <summary data-cy="settings-drop-down">
+          Settings
+        </summary>
 
         <fieldset class="extra-controls">
           <label>
@@ -49,34 +51,51 @@
             <input type="radio" name="macrons" value="true">
             Produce macrons (āēīō)
           </label>
+
+          <label>
+            <input type="checkbox" name="double-vowels" checked data-cy="option-double-vowels">
+            Type a vowel twice to type a long vowel (aa → â)
+          </label>
         </fieldset>
       </details>
     </form>
-
   </main>
 
-  <footer>
+  <aside>
     <h2> What is this? </h2>
     <p> This is a <strong>standard Roman orthography (SRO)</strong>
     to <strong>syllabics</strong> converter for <strong>Cree</strong>
     (N-dialect, Th-dialect, and Y-dialect).
-    Type the text you want to convert in the appropriately labelled box, and
-    the result should appear in the other box automatically as you type!  The
-    converter is bidirectional: it can go from SRO to syllabics and back
-    again. It supports both circumflexes (âêîô) and macrons (āēīō). It also
-    supports the special
-    <a href="https://crk-orthography.readthedocs.io/en/stable/glossary.html#term-sandhi">Sandhi orthographical rule</a>.
 
-    <p> Behind the scenes, this is a demo of the
-    <a href="https://www.npmjs.com/package/cree-sro-syllabics">cree-sro-syllabics JavaScript library</a>,
-    which is
-    <a href="https://opensource.com/resources/what-open-source">free and open source</a>,
-    and <a href="https://github.com/eddieantonio/cree-sro-syllabics.js">available on GitHub</a>.
-    You can use <code>npm</code> to install cree-sro-syllabics in your own JavaScript projects:
-    <code>npm install --save cree-sro-syllabics</code>
+    <h2> How to use the converter </h2>
 
-    <p>The version of the cree-sro-syllabics library on demo here is
-    <span id="library-version">unknown</span>.
+    <p> Type the text you want to convert in the appropriately labelled box, and
+    the result will appear in the other box instantly!
+
+    <p> The converter is <strong>bidirectional</strong>: it can go from SRO to
+    syllabics and back again.
+
+    <p> Typing a vowel <strong>twice</strong> in SRO (e.g., ee, ii, oo, aa)
+    will convert it into a long vowel (ê, î, ô, â). You can turn this off in
+    the <a href="#settings">settings</a>.
+
+    <p> You can use circumflexes (âêîô) or macrons (āēīō). When
+    converting from syllabics to SRO, you can choose which to produce in the
+    <a href="#settings">settings</a>.
+  </aside>
+
+  <footer>
+    <ul class="meta">
+      <li>
+      <a href="https://www.npmjs.com/package/cree-sro-syllabics">
+          cree-sro-syllabics v<span id="library-version">unknown</span>
+      </a>
+      <li>
+      Made with ❤︎ by <a href="https://github.com/eddieantonio">Eddie Antonio Santos</a>
+      <li>
+      <a href="https://github.com/eddieantonio/syllabics.app">Open source</a>
+    </p>
+
     <script>
       document.getElementById('library-version').innerText = CREE_SRO_SYLLABICS_VERSION;
     </script>

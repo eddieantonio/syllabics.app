@@ -23,7 +23,9 @@
   document.addEventListener('DOMContentLoaded', function () {
     var sroBox = document.getElementById('sro');
     var sylBox = document.getElementById('syl');
+    var doubledVowelCheckbox = document.getElementsByName('double-vowels')[0];
     var macronButtons = document.getElementsByName('macrons');
+    var previousSROText = sroBox.value;
 
     // Convert "dirty" changes soon as the page is loaded.
     if (dirty == 'sro') {
@@ -32,9 +34,68 @@
       sendSyllabics();
     }
 
+    // Add a long vowel when double-pressing a vowel.
+    sroBox.addEventListener('input', function (event) {
+      var newSROText = sroBox.value;
+      var differentAt;
+      var addedChar;
+      var commonPrefix;
+      var newString;
+
+      // Obey settings on whether it should change.
+      if (!doubledVowelCheckbox.checked) {
+        return;
+      }
+
+      // Check if exactly one character has been ADDED.
+      // Only then can we check whether we want a long vowel.
+      if (newSROText.length === previousSROText.length + 1) {
+        differentAt = whereDiffer(previousSROText, newSROText);
+        console.assert(newSROText.substr(0, differentAt) ===
+                       previousSROText.substr(0, differentAt));
+        commonPrefix = previousSROText.substr(0, differentAt);
+        addedChar = newSROText[differentAt];
+
+        // Check if a vowel has been doubled.
+        if (isSROShortVowel(addedChar) && lastCharOf(commonPrefix) === addedChar) {
+          // Pretend we never typed the second vowel; instead, add the long
+          // vowel to the buffer.
+          event.preventDefault();
+          // Construct new string by chopping off the short vowel from the
+          // common prefix, and chopping off the end of the previous buffer.
+          newString = commonPrefix.substr(0, commonPrefix.length - 1)
+            + longVowelOf(addedChar)
+            + previousSROText.substr(differentAt);
+          previousSROText = event.target.value = newString;
+          return;
+        }
+      }
+
+      previousSROText = newSROText;
+    });
+
+    function lastCharOf(string) {
+      return string[string.length - 1];
+    }
+
+    function whereDiffer(prev, current) {
+      var i;
+      console.assert(prev.length + 1 === current.length);
+      for (i = 0; i < prev.length; i++) {
+        if (prev[i] !== current[i]) {
+          return i;
+        }
+      }
+      // They must differ at the last position!
+      return i;
+    }
+
+
     // Send the appropriate request when the user types or pastes into the SRO
     // or syllabics boxes, respectively.
-    sroBox.addEventListener('input', function () { sendSRO(); });
+    sroBox.addEventListener('input', function () {
+      sendSRO();
+    });
     sylBox.addEventListener('input', function () { sendSyllabics(); });
 
     // Send a request when somebody hits the macron/circumflex switch.
@@ -47,6 +108,13 @@
 
     // Change the values when the /#!hash changes.
     window.onhashchange = function () {
+      var settingsBox;
+      // Open the settings box if navigated to.
+      if (location.hash === '#settings') {
+        settingsBox = document.getElementById('settings');
+        settingsBox.open = true;
+      }
+
       var pairs = parseFragment();
       updateBoxes(pairs);
       if ('sro' in pairs) {
@@ -81,6 +149,32 @@
 
     function send(message) {
       updateBoxes(message);
+    }
+
+    function isIgnorableKey(event) {
+      // if event.key is missing...?
+      // OR if event.key is something like "Space", "Meta", or something like
+      // "ArrowRight", instead of a single character.
+      return !event.key || event.key.length > 1;
+    }
+
+    // Return the long version of a short vowel.
+    function longVowelOf(vowel) {
+      if (vowel === 'e') {
+        return 'ê';
+      } else if (vowel === 'i') {
+        return 'î';
+      } else if (vowel === 'o') {
+        return 'ô';
+      } else if (vowel === 'a') {
+        return 'â'
+      } else {
+        throw new RangeError('Invalid long vowel: ' + vowel);
+      }
+    }
+
+    function isSROShortVowel(letter) {
+      return letter === 'e' || letter === 'i' || letter === 'o' || letter === 'a';
     }
   });
 
