@@ -42,6 +42,7 @@
       var commonPrefix;
       var newString;
 
+      // Obey settings on whether it should change.
       if (!doubledVowelCheckbox.checked) {
         return;
       }
@@ -107,6 +108,13 @@
 
     // Change the values when the /#!hash changes.
     window.onhashchange = function () {
+      var settingsBox;
+      // Open the settings box if navigated to.
+      if (location.hash === '#settings') {
+        settingsBox = document.getElementById('settings');
+        settingsBox.open = true;
+      }
+
       var pairs = parseFragment();
       updateBoxes(pairs);
       if ('sro' in pairs) {
