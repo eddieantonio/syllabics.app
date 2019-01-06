@@ -59,10 +59,9 @@
         </fieldset>
       </details>
     </form>
-
   </main>
 
-  <footer>
+  <aside>
     <h2> What is this? </h2>
     <p> This is a <strong>standard Roman orthography (SRO)</strong>
     to <strong>syllabics</strong> converter for <strong>Cree</strong>
@@ -83,9 +82,20 @@
     <p> You can use circumflexes (âêîô) or macrons (āēīō). When
     converting from syllabics to SRO, you can choose which to produce in the
     <a href="#settings">settings</a>.
+  </aside>
 
-    <!-- true footer? -->
-    <p> cree-sro-syllabics <span id="library-version">unknown</span>.
+  <footer>
+    <ul class="meta">
+      <li>
+      <a href="https://www.npmjs.com/package/cree-sro-syllabics">
+          cree-sro-syllabics v<span id="library-version">unknown</span>
+      </a>
+      <li>
+      Made with ❤︎ by <a href="https://github.com/eddieantonio">Eddie Antonio Santos</a>
+      <li>
+      <a href="https://github.com/eddieantonio/syllabics.app">Open source</a>
+    </p>
+
     <script>
       document.getElementById('library-version').innerText = CREE_SRO_SYLLABICS_VERSION;
     </script>

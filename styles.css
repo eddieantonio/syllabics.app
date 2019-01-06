@@ -1,4 +1,4 @@
-/*
+/*!
  * This is free and unencumbered software released into the public domain.
  *
  * Anyone is free to copy, modify, publish, use, compile, sell, or
@@ -40,7 +40,7 @@ a {
     color: #0366d6;
 }
 
-footer {
+aside, footer {
     font-size: 9pt;
     color: #444;
 }
@@ -71,7 +71,7 @@ a > code {
     margin: 1rem auto;
 }
 
-main, footer {
+main, aside, footer {
     margin: 1rem;
 }
 
@@ -115,4 +115,24 @@ fieldset > label {
     .box textarea {
         min-height: 5.5ex;
     }
+}
+
+footer {
+    text-align: center;
+}
+
+ul.meta {
+    margin-left: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+
+ul.meta li {
+    display: inline-block;
+}
+
+ul.meta li:not(:first-child)::before {
+    content: " · ";
+    margin: auto .25em;
 }
