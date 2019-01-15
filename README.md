@@ -2,8 +2,7 @@ Syllabics.app
 =============
 
 [![Build Status](https://travis-ci.org/eddieantonio/syllabics.app.svg?branch=production)](https://travis-ci.org/eddieantonio/syllabics.app)
-[![Cypress Recordings](https://img.shields.io/badge/cypress-recordings-f0f0f0.svg)](https://dashboard.cypress.io/#/projects/addnr3/runs)
-
+[![Cypress Recordings](https://img.shields.io/badge/cypress-recordings-1dbe89.svg)](https://dashboard.cypress.io/#/projects/addnr3/runs)
 
 Source code for the [syllabics.app][]. This is a Western Cree SRO to
 syllabics converter app, powered by [cree-sro-syllabics][].
