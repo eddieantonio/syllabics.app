@@ -19,11 +19,8 @@
   <link rel="icon" type="image/png" href="img/favicon-16.png" sizes="16x16">
   <link rel="icon" type="image/png" href="img/favicon-32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="img/favicon-96.png" sizes="96x96">
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js');
-    }
-  </script>
+  <meta name="theme-color" content="#444">
+  <link rel="manifest" href="manifest.webmanifest" type="application/json">
 </head>
 <body>
   <main>
@@ -105,5 +102,10 @@
       document.getElementById('library-version').innerText = CREE_SRO_SYLLABICS_VERSION;
     </script>
   </footer>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  </script>
 </body>
 </html>
