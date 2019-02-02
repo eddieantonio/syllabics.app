@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Cree SRO ⇔ syllabics converter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" media="all">
   <script src="./main.js"></script>
   <meta property="og:title" content="Cree SRO/syllabics converter">
   <meta name="twitter:card" content="app">
@@ -19,6 +19,11 @@
   <link rel="icon" type="image/png" href="img/favicon-16.png" sizes="16x16">
   <link rel="icon" type="image/png" href="img/favicon-32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="img/favicon-96.png" sizes="96x96">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  </script>
 </head>
 <body>
   <main>
