@@ -12,7 +12,8 @@
     "cree-sro-syllabics": "^2018.12.7"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.10.3"
+    "parcel-bundler": "^1.10.3",
+    "parcel-plugin-sw-precache": "^1.0.3"
   },
   "scripts": {
     "now-build": "parcel build index.html",
