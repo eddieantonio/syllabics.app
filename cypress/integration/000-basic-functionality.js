@@ -18,11 +18,11 @@ describe('Basic functionality', function () {
 
     cy.get('textarea#syl')
       .clear()
-      .type('ᑲᐦᑭᔭᐤ ᑮᑿᕀ ᐚᐦᑰᐦᑐᐏᐣ᙮');
+      .type('ᑲᐦᑭᔭᐤ ᑮᑿᕀ ᐚᐦᑰᐦᑐᐘᐠ᙮');
 
     cy.get('textarea#sro')
       .invoke('val')
-      .should('equal', 'kahkiyaw kîkway wâhkôhtowin.');
+      .should('equal', 'kahkiyaw kîkway wâhkôhtowak.');
   });
 
   it('allows for SRO transcription without clearing the textarea', function () {
@@ -42,10 +42,10 @@ describe('Basic functionality', function () {
 
     cy.get('textarea#syl')
       .clear()
-      .type('ᑲᐦᑭᔭᐤ ᑮᑿᕀ ᐚᐦᑰᐦᑐᐏᐣ᙮');
+      .type('ᑲᐦᑭᔭᐤ ᑮᑿᕀ ᐚᐦᑰᐦᑐᐘᐠ᙮');
 
     cy.get('textarea#sro')
       .invoke('val')
-      .should('equal', 'kahkiyaw kîkway wâhkôhtowin.');
+      .should('equal', 'kahkiyaw kîkway wâhkôhtowak.');
   });
 });
