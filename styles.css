@@ -115,6 +115,11 @@ fieldset > label {
     .box textarea {
         min-height: 5.5ex;
     }
+
+    /* HACK! Get rid of the bullet in the second line of <li>s on small screens */
+    ul.meta.meta li:nth-child(2)::before {
+        content: ' ';
+    }
 }
 
 footer {
