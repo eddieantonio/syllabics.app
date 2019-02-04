@@ -180,10 +180,6 @@
 
   window.getDefaultTextareaValue = function (name) {
     var textarea = document.getElementById(name);
-    var defaults = {
-      sro: "tân'si",
-      syl: 'ᑖᓂᓯ'
-    };
 
     if (name != 'sro' && name != 'syl') {
       return;
@@ -193,8 +189,6 @@
     if (fragment[name]) {
       dirty = name;
       textarea.value = fragment[name];
-    } else {
-      textarea.value = defaults[name];
     }
   };
 
