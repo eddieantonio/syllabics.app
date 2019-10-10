@@ -9,10 +9,10 @@
     "url": "https://github.com/eddieantonio/syllabics.app.git"
   },
   "dependencies": {
-    "cree-sro-syllabics": "^2019.5.4"
+    "cree-sro-syllabics": "^2019.10.9"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.3",
+    "parcel-bundler": "^1.12.4",
     "parcel-plugin-sw-precache": "^1.1.1"
   },
   "scripts": {
