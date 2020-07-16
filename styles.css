@@ -28,116 +28,136 @@
 @charset "UTF-8";
 
 html {
-    color: #24292e;
-    background-color: #f6f8fa;
+  color: #24292e;
+  background-color: #f6f8fa;
 }
 
-html, textarea {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI" ,Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+html,
+textarea {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 a {
-    color: #0366d6;
+  color: #0366d6;
 }
 
-aside, footer {
-    font-size: 9pt;
-    color: #444;
+aside,
+footer {
+  font-size: 9pt;
+  color: #444;
 }
 
 code {
-    background-color: #eee;
+  background-color: #eee;
 }
 a > code {
-    background-color: inherit;
+  background-color: inherit;
 }
 
 .box label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: .5em;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5em;
 }
 
 .box textarea {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    margin: 0 auto;
-    padding: 2px .25em;
-    font-size: 24pt;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2px 0.25em;
+  font-size: 24pt;
 }
 
 .box {
-    margin: 1rem auto;
+  margin: 1rem auto;
 }
 
-main, aside, footer {
-    margin: 1rem;
+.syl-copy-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 10%;
+  height: 57px;
+}
+
+.copy-button {
+  font-weight: bold;
+  padding: 10px 20px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  border-width: 2px;
+}
+
+main,
+aside,
+footer {
+  margin: 1rem;
 }
 
 summary {
-    padding: 5px;
-    border-radius: 4px;
+  padding: 5px;
+  border-radius: 4px;
 
-    background-color: #f6f8fa;
-    box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0.1),
-                inset 1px 1px 2px rgba(255, 255, 255, 0.1);
+  background-color: #f6f8fa;
+  box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0.1),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.1);
 
-    cursor: pointer;
+  cursor: pointer;
 }
 
 summary + fieldset {
-    border: none;
-    margin: -4px 0 0;
-    padding-top: 8px;
-    background-color: #d8d8e0;
-    border-radius: 0 0 2px 2px;
-    padding-bottom: 1em;
-    box-shadow: inset 1px 3px 1px rgba(0,0,0, 0.1);
-    z-index: -5;
+  border: none;
+  margin: -4px 0 0;
+  padding-top: 8px;
+  background-color: #d8d8e0;
+  border-radius: 0 0 2px 2px;
+  padding-bottom: 1em;
+  box-shadow: inset 1px 3px 1px rgba(0, 0, 0, 0.1);
+  z-index: -5;
 }
 
 fieldset > label {
-    display: inline-block;
+  display: inline-block;
 }
 
 /* Mobile-S size: max-width: 320px; */
 /* Mobile-M size: */
 @media (max-width: 375px) {
-    h1 {
-        font-size: 1.25rem;
-    }
+  h1 {
+    font-size: 1.25rem;
+  }
 
-    .hide-phone {
-        display: none;
-    }
+  .hide-phone {
+    display: none;
+  }
 
-    .box textarea {
-        min-height: 5.5ex;
-    }
+  .box textarea {
+    min-height: 5.5ex;
+  }
 
-    /* HACK! Get rid of the bullet in the second line of <li>s on small screens */
-    ul.meta.meta li:nth-child(2)::before {
-        content: ' ';
-    }
+  /* HACK! Get rid of the bullet in the second line of <li>s on small screens */
+  ul.meta.meta li:nth-child(2)::before {
+    content: " ";
+  }
 }
 
 footer {
-    text-align: center;
+  text-align: center;
 }
 
 ul.meta {
-    margin-left: 0;
-    padding-left: 0;
-    list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+  list-style: none;
 }
 
-
 ul.meta li {
-    display: inline-block;
+  display: inline-block;
 }
 
 ul.meta li:not(:first-child)::before {
-    content: " · ";
-    margin: auto .25em;
+  content: " · ";
+  margin: auto 0.25em;
 }

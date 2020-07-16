@@ -31,12 +31,15 @@
     <form>
       <div class="box box-sro">
         <label for="sro"> SRO </label>
-        <textarea id="sro" name="sro" placeholder="tânisi. Type Cree (SRO) here!" autocorrect="off" autocapitalize="off" autofocus lang="cr" autocomplete="off" spellcheck="false"></textarea>
+        <textarea id="sro" name="sro" placeholder="tânisi. Type Cree (SRO) here!" autocorrect="off" autocapitalize="off" autofocus lang="cr" autocomplete="off" spellcheck="false"></textarea>        
         <script>getDefaultTextareaValue('sro')</script>
       </div>
 
       <div class="box box-sro">
-        <label for="syl"> Syllabics </label>
+        <div class="syl-copy-line">
+          <label for="syl"> Syllabics </label>
+          <button class="copy-button">Copy Symbols</button>
+        </div>
         <textarea id="syl" name="syl" placeholder="ᑖᓂᓯ᙮ Type syllabics here!" lang="cr" autocomplete="off" spellcheck="false"></textarea>
         <script>getDefaultTextareaValue('syl')</script>
       </div>
