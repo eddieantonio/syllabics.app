@@ -75,7 +75,7 @@ a > code {
   margin: 1rem auto;
 }
 
-#syl-copy-line {
+.syl-copy-line {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -83,7 +83,7 @@ a > code {
   height: 57px;
 }
 
-#copy-button {
+.copy-button {
   font-weight: bold;
   padding: 10px 20px;
   margin-left: 20px;

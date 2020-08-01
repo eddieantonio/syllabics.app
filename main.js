@@ -26,6 +26,7 @@
     var doubledVowelCheckbox = document.getElementsByName('double-vowels')[0];
     var macronButtons = document.getElementsByName('macrons');
     var previousSROText = sroBox.value;
+    var copyButton = document.getElementById('copy');
 
     // Convert "dirty" changes soon as the page is loaded.
     if (dirty == 'sro') {
@@ -68,6 +69,16 @@
             + previousSROText.substr(differentAt);
           previousSROText = event.target.value = newString;
           return;
+        }
+
+        // Copy syllabics onto clipboard
+        copyButton.addEventListener('click', copySyl());
+
+        function copySyl() {
+          //find variable holding answer syllabics
+          //copy it to the clipboard
+          console.log("The event listener triggered correctly");
+          copyButton.innerHTML = 'You clicked me!';
         }
       }
 
