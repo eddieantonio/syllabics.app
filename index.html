@@ -38,10 +38,22 @@
       <div class="box box-sro">
         <div class="syl-copy-line">
           <label id="syl-label" for="syl"> Syllabics </label>
-          <button id="copy" class="copy-button" onClick="copySyl()">Copy syllabics</button>
+         <!-- This onClick function copySyl() is in <script> and commented out in main.js line 180 -->
+          <button id="copy" class="copy-button" onclick="copySyl()">Copy syllabics</button>
         </div>
         <textarea id="syl" name="syl" placeholder="ᑖᓂᓯ᙮ Type syllabics here!" lang="cr" autocomplete="off" spellcheck="false"></textarea>
-        <script>getDefaultTextareaValue('syl')</script>
+        <script>
+          getDefaultTextareaValue('syl');
+          //find variable holding answer syllabics
+          //copy it to the clipboard
+          function copySyl() {
+            var copyText = document.getElementById("syl");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999)
+            document.execCommand("copy");
+            alert("Copied the text: " + copyText.value);
+          }
+        </script>
       </div>
 
       <details id="settings">
