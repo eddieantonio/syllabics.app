@@ -176,6 +176,18 @@
     function isSROShortVowel(letter) {
       return letter === 'e' || letter === 'i' || letter === 'o' || letter === 'a';
     }
+
+    // Copy syllabics onto clipboard
+    // function copySyl() {
+    //   console.log('Made it into copySyl()')
+    //   //find variable holding answer syllabics
+    //   //copy it to the clipboard
+    //   var copyText = document.getElementById("syl");
+    //   copyText.select();
+    //   copyText.setSelectionRange(0, 99999)
+    //   document.execCommand("copy");
+    //   alert("Copied the text: " + copyText.value);
+    // }
   });
 
   window.getDefaultTextareaValue = function (name) {
