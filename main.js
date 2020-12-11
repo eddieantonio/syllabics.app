@@ -25,6 +25,8 @@
     var sylBox = document.getElementById('syl');
     var doubledVowelCheckbox = document.getElementsByName('double-vowels')[0];
     var macronButtons = document.getElementsByName('macrons');
+    var hkFinalButtons = document.getElementsByName('macrons');
+
     var previousSROText = sroBox.value;
 
     // Convert "dirty" changes soon as the page is loaded.
@@ -93,9 +95,7 @@
 
     // Send the appropriate request when the user types or pastes into the SRO
     // or syllabics boxes, respectively.
-    sroBox.addEventListener('input', function () {
-      sendSRO();
-    });
+    sroBox.addEventListener('input', function () { sendSRO(); });
     sylBox.addEventListener('input', function () { sendSyllabics(); });
 
     // Send a request when somebody hits the macron/circumflex switch.
@@ -103,6 +103,14 @@
       var button = macronButtons[i];
       button.addEventListener('input', function() {
         sendSyllabics();
+      });
+    }
+
+    // Send a request when somebody hits the hk/x switch
+    for (var i = 0; i < hkFinalButtons.length; i++) {
+      var button = hkFinalButtons[i];
+      button.addEventListener('input', function () {
+        sendSRO();
       });
     }
 
@@ -136,8 +144,19 @@
       return button.value == 'true';
     }
 
+    function getHKStyle() {
+      var button = document.querySelector('input[name="final-hk"]:checked');
+      var value = button.value
+      console.assert(value === "x" || value === "hk", "unexpected value: " + value);
+      return value;
+    }
+
     function sendSRO() {
-      send({ syl: CreeSROSyllabics.sro2syllabics(sroBox.value) });
+      send({
+        syl: CreeSROSyllabics.sro2syllabics(sroBox.value, {
+          finalHK: getHKStyle()
+        })
+      });
     }
 
     function sendSyllabics() {
