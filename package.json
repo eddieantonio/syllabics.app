@@ -12,14 +12,14 @@
     "cree-sro-syllabics": "^2020.6.23"
   },
   "devDependencies": {
+    "cypress": "^6.1.0",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-sw-precache": "^1.1.1"
   },
   "scripts": {
     "build": "parcel build index.html",
     "start": "parcel serve index.html",
-    "test": "cypress run",
-    "install:test": "npm install --no-save 'cypress@^3.1.5' 'wait-on@^3.2.0'"
+    "test": "cypress run"
   },
   "license": "AGPL-3.0"
 }
