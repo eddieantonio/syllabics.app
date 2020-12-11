@@ -46,22 +46,38 @@
           Settings
         </summary>
 
-        <fieldset class="extra-controls">
-          <label>
-            <input type="radio" name="macrons" value="false" checked>
-            Produce circumflexes (âêîô)
-          </label>
+        <div class="extra-controls">
+          <fieldset>
+            <label>
+              <input type="radio" name="macrons" value="false" checked>
+              Produce circumflexes (âêîô)
+            </label>
 
-          <label>
-            <input type="radio" name="macrons" value="true">
-            Produce macrons (āēīō)
-          </label>
+            <label>
+              <input type="radio" name="macrons" value="true">
+              Produce macrons (āēīō)
+            </label>
+          </fieldset>
 
-          <label>
-            <input type="checkbox" name="double-vowels" checked data-cy="option-double-vowels">
-            Type a vowel twice to type a long vowel (aa → â)
-          </label>
-        </fieldset>
+          <fieldset>
+            <label>
+              <input type="radio" name="final-hk" value="x" checked data-cy="option-final-hk">
+              use <strong>ᕽ</strong> at end of words
+            </label>
+
+            <label>
+              <input type="radio" name="final-hk" value="hk" data-cy="option-final-hk">
+              use <strong>ᐦᐠ</strong> at end of words
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <label>
+              <input type="checkbox" name="double-vowels" checked data-cy="option-double-vowels">
+              Type a vowel twice to type a long vowel (aa → â)
+            </label>
+          </fieldset>
+        </div>
       </details>
     </form>
   </main>
