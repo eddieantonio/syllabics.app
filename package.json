@@ -9,7 +9,7 @@
     "url": "https://github.com/eddieantonio/syllabics.app.git"
   },
   "dependencies": {
-    "cree-sro-syllabics": "^2020.6.23"
+    "cree-sro-syllabics": "^2020.12.11"
   },
   "devDependencies": {
     "cypress": "^6.1.0",
