@@ -25,7 +25,7 @@
     var sylBox = document.getElementById('syl');
     var doubledVowelCheckbox = document.getElementsByName('double-vowels')[0];
     var macronButtons = document.getElementsByName('macrons');
-    var hkFinalButtons = document.getElementsByName('macrons');
+    var hkFinalButtons = document.getElementsByName('final-hk');
 
     var previousSROText = sroBox.value;
 
@@ -92,26 +92,19 @@
       return i;
     }
 
-
     // Send the appropriate request when the user types or pastes into the SRO
     // or syllabics boxes, respectively.
-    sroBox.addEventListener('input', function () { sendSRO(); });
-    sylBox.addEventListener('input', function () { sendSyllabics(); });
+    sroBox.addEventListener('input', sendSROFromEvent);
+    sylBox.addEventListener('input', sendSyllabicsFromEvent);
 
-    // Send a request when somebody hits the macron/circumflex switch.
+    // Recompute the SRO when the macron/circumflex switch is clicked
     for (var i = 0; i < macronButtons.length; i++) {
-      var button = macronButtons[i];
-      button.addEventListener('input', function() {
-        sendSyllabics();
-      });
+      macronButtons[i].addEventListener('input', sendSyllabicsFromEvent);
     }
 
-    // Send a request when somebody hits the hk/x switch
+    // Recompute the syllabicsv when the final HK is toggled
     for (var i = 0; i < hkFinalButtons.length; i++) {
-      var button = hkFinalButtons[i];
-      button.addEventListener('input', function () {
-        sendSRO();
-      });
+      hkFinalButtons[i].addEventListener('input', sendSROFromEvent);
     }
 
     // Change the values when the /#!hash changes.
@@ -194,6 +187,20 @@
 
     function isSROShortVowel(letter) {
       return letter === 'e' || letter === 'i' || letter === 'o' || letter === 'a';
+    }
+
+    /**
+     * Event hanlders that ignores the event
+     */
+    function sendSROFromEvent(/* ignored: event */) {
+      sendSRO();
+    }
+
+    /**
+     * Event hanlders that ignores the event
+     */
+    function sendSyllabicsFromEvent(/* ignored: event */) {
+      sendSyllabics();
     }
   });
 
