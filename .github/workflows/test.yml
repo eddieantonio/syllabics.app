@@ -1,0 +1,13 @@
+name: End-to-end tests
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v2
+        with:
+          wait-on: http://localhost:1234
