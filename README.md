@@ -1,7 +1,7 @@
 Syllabics.app
 =============
 
-[![Build Status](https://travis-ci.org/eddieantonio/syllabics.app.svg?branch=production)](https://travis-ci.org/eddieantonio/syllabics.app)
+![End-to-end tests](https://github.com/eddieantonio/syllabics.app/workflows/End-to-end%20tests/badge.svg?branch=production)
 [![Cypress Recordings](https://img.shields.io/badge/cypress-recordings-1dbe89.svg)](https://dashboard.cypress.io/#/projects/addnr3/runs)
 
 Source code for the [syllabics.app][]. This is a Western Cree SRO to
