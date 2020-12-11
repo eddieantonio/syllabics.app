@@ -48,4 +48,48 @@ describe('Basic functionality', function () {
       .invoke('val')
       .should('equal', 'kahkiyaw kîkway wâhkôhtowak.');
   });
+
+  describe("hk finals", function () {
+    const sroInput = "Maskwaciisihk";
+
+    it('supports ᕽ-style finals', function () {
+      cy.visit('/');
+
+      // Enable the ᕽ setting
+      cy.get('[data-cy="settings-drop-down"]')
+        .click();
+      cy.get('[data-cy="option-final-x"]')
+        .should("be.visible")
+        .click();
+
+      cy.get('textarea#sro')
+        .clear()
+        .type(sroInput);
+
+      cy.get('textarea#syl')
+        .invoke('val')
+        .should('not.equal', 'ᒪᐢᑿᒌᓯᐦᐠ')
+        .should('equal', 'ᒪᐢᑿᒌᓯᕽ');
+    });
+
+    it('supports ᐦᐠ-style finals', function () {
+      cy.visit('/');
+
+      // Enable the ᕽ setting
+      cy.get('[data-cy="settings-drop-down"]')
+        .click();
+      cy.get('[data-cy="option-final-hk"]')
+        .should("be.visible")
+        .click();
+
+      cy.get('textarea#sro')
+        .clear()
+        .type(sroInput);
+
+      cy.get('textarea#syl')
+        .invoke('val')
+        .should('not.equal', 'ᒪᐢᑿᒌᓯᕽ')
+        .should('equal', 'ᒪᐢᑿᒌᓯᐦᐠ');
+    });
+  });
 });
