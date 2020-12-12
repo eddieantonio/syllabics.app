@@ -25,6 +25,8 @@
     var sylBox = document.getElementById('syl');
     var doubledVowelCheckbox = document.getElementsByName('double-vowels')[0];
     var macronButtons = document.getElementsByName('macrons');
+    var hkFinalButtons = document.getElementsByName('final-hk');
+
     var previousSROText = sroBox.value;
 
     // Convert "dirty" changes soon as the page is loaded.
@@ -90,20 +92,19 @@
       return i;
     }
 
-
     // Send the appropriate request when the user types or pastes into the SRO
     // or syllabics boxes, respectively.
-    sroBox.addEventListener('input', function () {
-      sendSRO();
-    });
-    sylBox.addEventListener('input', function () { sendSyllabics(); });
+    sroBox.addEventListener('input', sendSROFromEvent);
+    sylBox.addEventListener('input', sendSyllabicsFromEvent);
 
-    // Send a request when somebody hits the macron/circumflex switch.
+    // Recompute the SRO when the macron/circumflex switch is clicked
     for (var i = 0; i < macronButtons.length; i++) {
-      var button = macronButtons[i];
-      button.addEventListener('input', function() {
-        sendSyllabics();
-      });
+      macronButtons[i].addEventListener('input', sendSyllabicsFromEvent);
+    }
+
+    // Recompute the syllabicsv when the final HK is toggled
+    for (var i = 0; i < hkFinalButtons.length; i++) {
+      hkFinalButtons[i].addEventListener('input', sendSROFromEvent);
     }
 
     // Change the values when the /#!hash changes.
@@ -136,8 +137,19 @@
       return button.value == 'true';
     }
 
+    function getHKStyle() {
+      var button = document.querySelector('input[name="final-hk"]:checked');
+      var value = button.value
+      console.assert(value === "x" || value === "hk", "unexpected value: " + value);
+      return value;
+    }
+
     function sendSRO() {
-      send({ syl: CreeSROSyllabics.sro2syllabics(sroBox.value) });
+      send({
+        syl: CreeSROSyllabics.sro2syllabics(sroBox.value, {
+          finalHK: getHKStyle()
+        })
+      });
     }
 
     function sendSyllabics() {
@@ -175,6 +187,20 @@
 
     function isSROShortVowel(letter) {
       return letter === 'e' || letter === 'i' || letter === 'o' || letter === 'a';
+    }
+
+    /**
+     * Event hanlders that ignores the event
+     */
+    function sendSROFromEvent(/* ignored: event */) {
+      sendSRO();
+    }
+
+    /**
+     * Event hanlders that ignores the event
+     */
+    function sendSyllabicsFromEvent(/* ignored: event */) {
+      sendSyllabics();
     }
   });
 
