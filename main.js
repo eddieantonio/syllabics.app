@@ -172,14 +172,18 @@
 
     // Return the long version of a short vowel.
     function longVowelOf(vowel) {
+      let produceMacrons = shouldProduceMacrons();
+
+      // TODO: make this less dumb
+      // TODO: write a test!
       if (vowel === 'e') {
-        return 'ê';
+        return produceMacrons ? 'ē' : 'ê';
       } else if (vowel === 'i') {
-        return 'î';
+        return produceMacrons ? 'ī' : 'î';
       } else if (vowel === 'o') {
-        return 'ô';
+        return produceMacrons ? 'ō' : 'ô';
       } else if (vowel === 'a') {
-        return 'â'
+        return produceMacrons ? 'ā' : 'â';
       } else {
         throw new RangeError('Invalid long vowel: ' + vowel);
       }
