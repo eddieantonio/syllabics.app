@@ -21,7 +21,48 @@ describe('Double typing for long vowels', function () {
       .should('contain', 'êtî nîya, êkwa ôhô nicîhkêyimâw.');
   });
 
+  it('supports macrons and circumflexes', function () {
+    const input = 'eetii niiya, eekwa oohoo niciihkeeyimaaw.';
+    const outputMacrons = 'ētī nīya, ēkwa ōhō nicīhkēyimāw.';
+    const outputCircumflexes = 'êtî nîya, êkwa ôhô nicîhkêyimâw.';
+
+    cy.visit('/');
+
+    cy.get('[data-cy="settings-drop-down"]')
+      .click();
+
+    // Make sure we're using circumflexes
+    cy.get('[data-cy="option-macrons"]')
+      .click();
+
+    // type double vowels here:
+    cy.get('textarea#sro')
+      .clear()
+      .type(input);
+
+    // ...and the results should be reflected in the original buffer.
+    cy.get('textarea#sro')
+      .invoke('val')
+      .should('contain', outputMacrons);
+
+    // switch to macrons
+    cy.get('[data-cy="option-circumflexes"]')
+      .click();
+
+    // type double vowels here:
+    cy.get('textarea#sro')
+      .clear()
+      .type(input);
+
+    // ...and the results should be reflected in the original buffer.
+    cy.get('textarea#sro')
+      .invoke('val')
+      .should('contain', outputCircumflexes);
+  });
+
   it('should not affect pasted text', function () {
+    cy.visit('/');
+
     cy.get('textarea#sro').as('sro');
     var insertedText = 'mitho-ociimi-kiisikanisik';
 
@@ -44,6 +85,8 @@ describe('Double typing for long vowels', function () {
   });
 
   it('can be disabled', function () {
+    cy.visit('/');
+
     cy.get('[data-cy="option-double-vowels"]').as('checkbox');
     cy.get('textarea#sro').as('sro');
 
