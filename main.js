@@ -172,21 +172,17 @@
 
     // Return the long version of a short vowel.
     function longVowelOf(vowel) {
-      let produceMacrons = shouldProduceMacrons();
+      const latinVowels = 'eioa';
 
-      // TODO: make this less dumb
-      // TODO: write a test!
-      if (vowel === 'e') {
-        return produceMacrons ? 'ē' : 'ê';
-      } else if (vowel === 'i') {
-        return produceMacrons ? 'ī' : 'î';
-      } else if (vowel === 'o') {
-        return produceMacrons ? 'ō' : 'ô';
-      } else if (vowel === 'a') {
-        return produceMacrons ? 'ā' : 'â';
-      } else {
+      let index = latinVowels.indexOf(vowel);
+      if (index < 0) {
         throw new RangeError('Invalid long vowel: ' + vowel);
       }
+
+      let accentedVowels = shouldProduceMacrons()
+        ? 'ēīōā'
+        : 'êîôâ';
+      return accentedVowels[index];
     }
 
     function isSROShortVowel(letter) {
