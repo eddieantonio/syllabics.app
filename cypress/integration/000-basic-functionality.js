@@ -1,6 +1,11 @@
 describe('Basic functionality', function () {
   const NNBSP = '\u202f';
 
+  before(function () {
+    // The service worker makes things sad :(
+    cy.unregisterServiceWorkers()
+  })
+
   it('transcribes SRO to syllabics', function () {
     cy.visit('/');
 

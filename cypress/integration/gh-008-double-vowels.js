@@ -2,6 +2,11 @@
  * Test double-typing to insert long vowels.
  */
 describe('Double typing for long vowels', function () {
+  before(function () {
+    // The service worker makes things sad :(
+    cy.unregisterServiceWorkers()
+  })
+
   it('should work by typing the same vowel twice', function () {
     cy.visit('/');
 
