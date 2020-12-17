@@ -23,3 +23,17 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+/**
+ * Unregister service workers.
+ *
+ * Derived from: https://love2dev.com/blog/how-to-uninstall-a-service-worker/
+ */
+Cypress.Commands.add("unregisterServiceWorkers", () => {
+  navigator.serviceWorker.getRegistrations()
+    .then(function (registrations) {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+});
