@@ -21,8 +21,5 @@
     "start": "parcel serve index.html",
     "test": "cypress run"
   },
-  "license": "AGPL-3.0",
-  "sw-precache": {
-    "additionalCodeFile": "src/service-worker-clear-cache.js"
-  }
+  "license": "AGPL-3.0"
 }
