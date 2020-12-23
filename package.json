@@ -17,7 +17,7 @@
     "parcel-plugin-sw-precache": "^1.1.1"
   },
   "scripts": {
-    "build": "parcel build index.html",
+    "build": "parcel build -d public index.html",
     "start": "parcel serve index.html",
     "test": "cypress run"
   },
