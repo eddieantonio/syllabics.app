@@ -26,6 +26,7 @@
     var doubledVowelCheckbox = document.getElementsByName('double-vowels')[0];
     var macronButtons = document.getElementsByName('macrons');
     var hkFinalButtons = document.getElementsByName('final-hk');
+    var clearButton = document.getElementsByName('clear')[0];
 
     var previousSROText = sroBox.value;
 
@@ -106,6 +107,11 @@
     for (var i = 0; i < hkFinalButtons.length; i++) {
       hkFinalButtons[i].addEventListener('input', sendSROFromEvent);
     }
+
+    clearButton.addEventListener('click', function () {
+      sroBox.value = ''
+      sylBox.value = ''
+    })
 
     // Change the values when the /#!hash changes.
     window.onhashchange = function () {

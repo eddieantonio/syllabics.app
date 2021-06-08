@@ -97,4 +97,29 @@ describe('Basic functionality', function () {
         .should('equal', 'ᒪᐢᑿᒌᓯᐦᐠ');
     });
   });
+
+  describe('the clear button', function () {
+    it('should clear on click', function () {
+      cy.visit('/');
+
+      cy.get('textarea#sro')
+        .clear()
+        .type("tânisi");
+
+      cy.get('textarea#syl')
+        .invoke('val')
+        .should('equal', 'ᑖᓂᓯ');
+
+      cy.get('[data-cy=clear-button]')
+        .click();
+
+      cy.get('textarea#sro')
+        .invoke('val')
+        .should('equal', '')
+
+      cy.get('textarea#syl')
+        .invoke('val')
+        .should('equal', '')
+    })
+  })
 });
