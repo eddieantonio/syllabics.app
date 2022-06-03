@@ -1,5 +1,5 @@
 /*!
- * Copyright (C) 2018 Eddie Antonio Santos <easantos@ualberta.ca>
+ * Copyright (C) 2018–2022 Eddie Antonio Santos <hello@eddieantonio.ca>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
