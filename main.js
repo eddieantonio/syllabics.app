@@ -18,11 +18,16 @@
 (function () {
   var CreeSROSyllabics = require('cree-sro-syllabics');
 
+  ///////////////////////////////// Exports //////////////////////////////////
+
   /**
    * The version of the cree-sro-syllabics library.
    * This is displayed in the footer, for reference.
    */
   window.CREE_SRO_SYLLABICS_VERSION = CreeSROSyllabics.version.toString();
+
+  // The exported name has a linguistic anti-pattern;
+  window.getDefaultTextareaValue = determineTextareaContentsFromFragment;
 
   /** global: whether there is text on the page during load that needs to be
     * converted  */
@@ -251,10 +256,16 @@
     }
   });
 
-  window.getDefaultTextareaValue = function (name) {
+
+
+  /**
+   * Parses the fragment and sets the named textarea's contents
+   * appropriately.
+   */
+  function determineTextareaContentsFromFragment(name) {
     var textarea = document.getElementById(name);
 
-    if (name != 'sro' && name != 'syl') {
+    if (name !== 'sro' && name !== 'syl') {
       return;
     }
 
