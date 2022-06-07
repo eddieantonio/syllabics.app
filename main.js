@@ -17,9 +17,17 @@
 
 (function () {
   var CreeSROSyllabics = require('cree-sro-syllabics');
+
+  /**
+   * The version of the cree-sro-syllabics library.
+   * This is displayed in the footer, for reference.
+   */
   window.CREE_SRO_SYLLABICS_VERSION = CreeSROSyllabics.version.toString();
 
+  /** global: whether there is text on the page during load that needs to be
+    * converted  */
   var dirty = null;
+
   document.addEventListener('DOMContentLoaded', function () {
     var sroBox = document.getElementById('sro');
     var sylBox = document.getElementById('syl');
@@ -77,12 +85,19 @@
       previousSROText = newSROText;
     });
 
+    /**
+     * Returns the last character of a string.
+     */
     function lastCharOf(string) {
       return string[string.length - 1];
     }
 
+    /**
+     * Returns the index of the first position that two strings differ.
+     */
     function whereDiffer(prev, current) {
       var i;
+      // TODO: move to call site.
       console.assert(prev.length + 1 === current.length);
       for (i = 0; i < prev.length; i++) {
         if (prev[i] !== current[i]) {
@@ -131,6 +146,9 @@
       }
     };
 
+    /**
+     * Updates which ever textbox needs updating.
+     */
     function updateBoxes(data) {
       if (data.sro)
         sroBox.value = data.sro;
@@ -138,11 +156,17 @@
         sylBox.value = data.syl;
     }
 
+    /**
+     * Returns whether the conversion should produce macrons.
+     */
     function shouldProduceMacrons() {
       var button = document.querySelector('input[name="macrons"]:checked');
       return button.value == 'true';
     }
 
+    /**
+     * @returns {'x' | 'hk'} which style of hk ending to use in conversions.
+     */
     function getHKStyle() {
       var button = document.querySelector('input[name="final-hk"]:checked');
       var value = button.value
@@ -150,6 +174,9 @@
       return value;
     }
 
+    /**
+     * Convert SRO to syllabics and show conversion.
+     */
     function sendSRO() {
       send({
         syl: CreeSROSyllabics.sro2syllabics(sroBox.value, {
@@ -158,6 +185,9 @@
       });
     }
 
+    /**
+     * Convert syllabics to SRO and show conversion.
+     */
     function sendSyllabics() {
       var sro = CreeSROSyllabics.syllabics2sro(sylBox.value, {
         longAccents: shouldProduceMacrons() ? 'macrons'  : 'circumflexes'
@@ -165,10 +195,16 @@
       send({ sro: sro });
     }
 
+    /**
+     * Perform a conversion.
+     */
     function send(message) {
       updateBoxes(message);
     }
 
+    /**
+     * (for the purposes of conversion) can we ignore this key event?
+     */
     function isIgnorableKey(event) {
       // if event.key is missing...?
       // OR if event.key is something like "Space", "Meta", or something like
@@ -176,7 +212,9 @@
       return !event.key || event.key.length > 1;
     }
 
-    // Return the long version of a short vowel.
+    /**
+     * Return the long version of a short vowel.
+     */
     function longVowelOf(vowel) {
       const latinVowels = 'eioa';
 
@@ -191,6 +229,9 @@
       return accentedVowels[index];
     }
 
+    /**
+     * Return true if the letter is a short vowel that can have a long accent.
+     */
     function isSROShortVowel(letter) {
       return letter === 'e' || letter === 'i' || letter === 'o' || letter === 'a';
     }
@@ -224,6 +265,20 @@
     }
   };
 
+  /**
+   * Parse the current URL's fragment (part after hashtag) for key/value parameters.
+   *
+   * Syntax:
+   *
+   *  /#!key1:value;key2:value;...
+   *
+   *  - Parameters are specified after the first '!' in the fragment.
+   *  - Parameters are separated by ';'.
+   *  - Keys are followed by ':', then the value.
+   *
+   * Returns an object of the key/value pairs. If a key is specified more than
+   * once, the last value is used.
+   */
   function parseFragment() {
     var fragment = location.hash;
     var pairsText = fragment.split('!', 2)[1];
