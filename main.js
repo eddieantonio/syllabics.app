@@ -102,8 +102,6 @@
      */
     function whereDiffer(prev, current) {
       var i;
-      // TODO: move to call site.
-      console.assert(prev.length + 1 === current.length);
       for (i = 0; i < prev.length; i++) {
         if (prev[i] !== current[i]) {
           return i;
