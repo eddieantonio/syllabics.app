@@ -16,16 +16,8 @@
  */
 
 ////////////////////////////////// Imports ///////////////////////////////////
+
 const CreeSROSyllabics = require('cree-sro-syllabics');
-
-
-///////////////////////////////// Exports //////////////////////////////////
-
-/**
- * The current version of the cree-sro-syllabics library.
- * This is displayed in the footer, for reference.
- */
-window.CREE_SRO_SYLLABICS_VERSION = CreeSROSyllabics.version.toString();
 
 
 //////////////////////////////////// Main ////////////////////////////////////
