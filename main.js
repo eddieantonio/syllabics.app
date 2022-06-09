@@ -27,12 +27,6 @@ const CreeSROSyllabics = require('cree-sro-syllabics');
  */
 window.CREE_SRO_SYLLABICS_VERSION = CreeSROSyllabics.version.toString();
 
-/**
- * Parses the URL fragment (part after #) to populate the value of the
- * textarea.
- */
-window.updateNamedTextareaUsingFragment = updateNamedTextareaUsingFragment;
-
 
 //////////////////////////////////// Main ////////////////////////////////////
 
@@ -258,15 +252,6 @@ function initializeApplication() {
   }
 };
 
-/**
- * Parses the fragment and sets the named textarea's contents
- * appropriately.
- */
-function updateNamedTextareaUsingFragment(name) {
-  // no-op: this functionality is now done in setupPage();
-
-  // TODO: delete this function
-};
 
 ///////////////////////////// Utility functions //////////////////////////////
 
