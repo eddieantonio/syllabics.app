@@ -21,13 +21,16 @@
   ///////////////////////////////// Exports //////////////////////////////////
 
   /**
-   * The version of the cree-sro-syllabics library.
+   * The current version of the cree-sro-syllabics library.
    * This is displayed in the footer, for reference.
    */
   window.CREE_SRO_SYLLABICS_VERSION = CreeSROSyllabics.version.toString();
 
-  // The exported name has a linguistic anti-pattern;
-  window.getDefaultTextareaValue = determineTextareaContentsFromFragment;
+  /**
+   * Parses the URL fragment (part after #) to populate the value of the
+   * textarea.
+   */
+  window.updateNamedTextareaUsingFragment = updateNamedTextareaUsingFragment;
 
   /** global: whether there is text on the page during load that needs to be
     * converted  */
@@ -260,7 +263,7 @@
    * Parses the fragment and sets the named textarea's contents
    * appropriately.
    */
-  function determineTextareaContentsFromFragment(name) {
+  function updateNamedTextareaUsingFragment(name) {
     var textarea = document.getElementById(name);
 
     if (name !== 'sro' && name !== 'syl') {
