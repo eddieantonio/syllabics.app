@@ -43,7 +43,12 @@ var dirty = null;
 
 //////////////////////////////////// Main ////////////////////////////////////
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', initializeApplication);
+
+/**
+ * Initializes the application once all elements on the page are loaded.
+ */
+function initializeApplication() {
   var sroBox = document.getElementById('sro');
   var sylBox = document.getElementById('syl');
   var doubledVowelCheckbox = document.getElementsByName('double-vowels')[0];
@@ -262,10 +267,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function sendSyllabicsFromEvent(/* ignored: event */) {
     sendSyllabics();
   }
-});
-
-
-///////////////////////////////// Public API /////////////////////////////////
+};
 
 /**
  * Parses the fragment and sets the named textarea's contents
@@ -284,7 +286,6 @@ function updateNamedTextareaUsingFragment(name) {
     textarea.value = fragment[name];
   }
 };
-
 
 
 ///////////////////////////// Utility functions //////////////////////////////
