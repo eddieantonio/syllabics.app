@@ -70,33 +70,39 @@ function initializeApplication() {
   }
 
   // Register event handlers
+  registerEventHandlers();
 
-  // Add a long vowel when double-pressing a vowel.
-  sroBox.addEventListener('input', handleKeypressInSROBox);
+  /**
+   * Registers all event handlers required by the application.
+   */
+  function registerEventHandlers() {
+    // Add a long vowel when double-pressing a vowel.
+    sroBox.addEventListener('input', handleKeypressInSROBox);
 
-  // Send the appropriate request when the user types or pastes into the SRO
-  // or syllabics boxes, respectively.
-  sroBox.addEventListener('input', sendSROFromEvent);
-  sylBox.addEventListener('input', sendSyllabicsFromEvent);
+    // Send the appropriate request when the user types or pastes into the SRO
+    // or syllabics boxes, respectively.
+    sroBox.addEventListener('input', sendSROFromEvent);
+    sylBox.addEventListener('input', sendSyllabicsFromEvent);
 
-  // Recompute the SRO when the macron/circumflex switch is clicked
-  for (var i = 0; i < macronButtons.length; i++) {
-    macronButtons[i].addEventListener('input', sendSyllabicsFromEvent);
+    // Recompute the SRO when the macron/circumflex switch is clicked
+    for (var i = 0; i < macronButtons.length; i++) {
+      macronButtons[i].addEventListener('input', sendSyllabicsFromEvent);
+    }
+
+    // Recompute the syllabics when the final HK is toggled
+    for (var i = 0; i < hkFinalButtons.length; i++) {
+      hkFinalButtons[i].addEventListener('input', sendSROFromEvent);
+    }
+
+    // Clear textboxes when the appropriate button is clicked
+    clearButton.addEventListener('click', function () {
+      sroBox.value = ''
+      sylBox.value = ''
+    })
+
+    // Change the textareas and do conversions when the /#!hash changes.
+    window.onhashchange = handleHashChange;
   }
-
-  // Recompute the syllabics when the final HK is toggled
-  for (var i = 0; i < hkFinalButtons.length; i++) {
-    hkFinalButtons[i].addEventListener('input', sendSROFromEvent);
-  }
-
-  // Clear textboxes when the appropriate button is clicked
-  clearButton.addEventListener('click', function () {
-    sroBox.value = ''
-    sylBox.value = ''
-  })
-
-  // Change the values when the /#!hash changes.
-  window.onhashchange = handleHashChange;
 
   /**
    * Special handling for keypresses in the SRO box.
