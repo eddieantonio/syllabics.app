@@ -60,16 +60,9 @@ function initializeApplication() {
 
   // Keeps the previous value of the textbox. Used for checking if a vowel was
   // typed twice.
-  var previousSROText = sroBox.value;
+  var previousSROText;
 
-  // Convert "dirty" changes soon as the page is loaded.
-  if (dirty == 'sro') {
-    sendSRO();
-  } else if (dirty == 'syl') {
-    sendSyllabics();
-  }
-
-  // Register event handlers
+  setupPage();
   registerEventHandlers();
 
   /**
@@ -102,6 +95,17 @@ function initializeApplication() {
 
     // Change the textareas and do conversions when the /#!hash changes.
     window.onhashchange = handleHashChange;
+  }
+
+  function setupPage() {
+    // Convert "dirty" changes soon as the page is loaded.
+    if (dirty == 'sro') {
+      sendSRO();
+    } else if (dirty == 'syl') {
+      sendSyllabics();
+    }
+
+    previousSROText = sroBox.value;
   }
 
   /**
