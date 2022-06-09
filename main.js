@@ -49,12 +49,13 @@ document.addEventListener('DOMContentLoaded', initializeApplication);
  * Initializes the application once all elements on the page are loaded.
  */
 function initializeApplication() {
-  var sroBox = document.getElementById('sro');
-  var sylBox = document.getElementById('syl');
-  var doubledVowelCheckbox = document.getElementsByName('double-vowels')[0];
-  var macronButtons = document.getElementsByName('macrons');
-  var hkFinalButtons = document.getElementsByName('final-hk');
-  var clearButton = document.getElementsByName('clear')[0];
+  // Elements on the page.
+  const sroBox = document.getElementById('sro');
+  const sylBox = document.getElementById('syl');
+  const doubledVowelCheckbox = document.getElementsByName('double-vowels')[0];
+  const macronButtons = document.getElementsByName('macrons');
+  const hkFinalButtons = document.getElementsByName('final-hk');
+  const clearButton = document.getElementsByName('clear')[0];
 
   var previousSROText = sroBox.value;
 
