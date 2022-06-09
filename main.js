@@ -71,44 +71,7 @@ function initializeApplication() {
   // Register event handlers
 
   // Add a long vowel when double-pressing a vowel.
-  sroBox.addEventListener('input', function (event) {
-    var newSROText = sroBox.value;
-    var differentAt;
-    var addedChar;
-    var commonPrefix;
-    var newString;
-
-    // Obey settings on whether it should change.
-    if (!doubledVowelCheckbox.checked) {
-      return;
-    }
-
-    // Check if exactly one character has been ADDED.
-    // Only then can we check whether we want a long vowel.
-    if (newSROText.length === previousSROText.length + 1) {
-      differentAt = whereDiffer(previousSROText, newSROText);
-      console.assert(newSROText.substr(0, differentAt) ===
-                     previousSROText.substr(0, differentAt));
-      commonPrefix = previousSROText.substr(0, differentAt);
-      addedChar = newSROText[differentAt];
-
-      // Check if a vowel has been doubled.
-      if (isSROShortVowel(addedChar) && lastCharOf(commonPrefix) === addedChar) {
-        // Pretend we never typed the second vowel; instead, add the long
-        // vowel to the buffer.
-        event.preventDefault();
-        // Construct new string by chopping off the short vowel from the
-        // common prefix, and chopping off the end of the previous buffer.
-        newString = commonPrefix.substr(0, commonPrefix.length - 1)
-          + longVowelOf(addedChar)
-          + previousSROText.substr(differentAt);
-        previousSROText = event.target.value = newString;
-        return;
-      }
-    }
-
-    previousSROText = newSROText;
-  });
+  sroBox.addEventListener('input', handleKeypressInSROBox);
 
   // Send the appropriate request when the user types or pastes into the SRO
   // or syllabics boxes, respectively.
@@ -148,6 +111,51 @@ function initializeApplication() {
       sendSyllabics();
     }
   };
+
+  /**
+   * Special handling for keypresses in the SRO box.
+   * 
+   * Handles double-pressing vowels such that ii -> î.
+   */
+  function handleKeypressInSROBox(event) {
+    var newSROText = sroBox.value;
+    var differentAt;
+    var addedChar;
+    var commonPrefix;
+    var newString;
+
+    // Obey settings on whether it should change.
+    if (!doubledVowelCheckbox.checked) {
+      // Let the default happen.
+      return;
+    }
+
+    // Check if exactly one character has been ADDED.
+    // Only then can we check whether we want a long vowel.
+    if (newSROText.length === previousSROText.length + 1) {
+      differentAt = whereDiffer(previousSROText, newSROText);
+      console.assert(newSROText.substr(0, differentAt) ===
+                     previousSROText.substr(0, differentAt));
+      commonPrefix = previousSROText.substr(0, differentAt);
+      addedChar = newSROText[differentAt];
+
+      // Check if a vowel has been doubled.
+      if (isSROShortVowel(addedChar) && lastCharOf(commonPrefix) === addedChar) {
+        // Pretend we never typed the second vowel; instead, add the long
+        // vowel to the buffer.
+        event.preventDefault();
+        // Construct new string by chopping off the short vowel from the
+        // common prefix, and chopping off the end of the previous buffer.
+        newString = commonPrefix.substr(0, commonPrefix.length - 1)
+          + longVowelOf(addedChar)
+          + previousSROText.substr(differentAt);
+        previousSROText = event.target.value = newString;
+        return;
+      }
+    }
+
+    previousSROText = newSROText;
+  }
 
   /**
    * Updates whichever textbox needs updating.
