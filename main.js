@@ -14,7 +14,10 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+////////////////////////////////// Imports ///////////////////////////////////
 const CreeSROSyllabics = require('cree-sro-syllabics');
+
 
 ///////////////////////////////// Exports //////////////////////////////////
 
@@ -30,9 +33,15 @@ window.CREE_SRO_SYLLABICS_VERSION = CreeSROSyllabics.version.toString();
  */
 window.updateNamedTextareaUsingFragment = updateNamedTextareaUsingFragment;
 
+
+////////////////////////////////// Globals ///////////////////////////////////
+
 /** global: whether there is text on the page during load that needs to be
   * converted  */
 var dirty = null;
+
+
+//////////////////////////////////// Main ////////////////////////////////////
 
 document.addEventListener('DOMContentLoaded', function () {
   var sroBox = document.getElementById('sro');
@@ -256,6 +265,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+///////////////////////////////// Public API /////////////////////////////////
 
 /**
  * Parses the fragment and sets the named textarea's contents
@@ -274,6 +284,10 @@ function updateNamedTextareaUsingFragment(name) {
     textarea.value = fragment[name];
   }
 };
+
+
+
+///////////////////////////// Utility functions //////////////////////////////
 
 /**
  * Parse the current URL's fragment (part after hashtag) for key/value parameters.
