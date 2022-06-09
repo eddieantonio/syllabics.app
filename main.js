@@ -102,13 +102,7 @@ function initializeApplication() {
       settingsBox.open = true;
     }
 
-    var pairs = parseFragment();
-    updateBoxes(pairs);
-    if ('sro' in pairs) {
-      sendSRO();
-    } else if ('syl' in pairs) {
-      sendSyllabics();
-    }
+    updateTextareasUsingFragment();
   };
 
   /**
@@ -164,6 +158,20 @@ function initializeApplication() {
       sroBox.value = data.sro;
     if (data.syl)
       sylBox.value = data.syl;
+  }
+
+  /**
+   * Checks the fragment (part after # in the URL) for text to convert.
+   */
+  function updateTextareasUsingFragment() {
+    var pairs = parseFragment();
+
+    updateBoxes(pairs);
+    if ('sro' in pairs) {
+      sendSRO();
+    } else if ('syl' in pairs) {
+      sendSyllabics();
+    }
   }
 
   /**
