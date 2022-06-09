@@ -6,6 +6,13 @@ describe('Basic functionality', function () {
     cy.unregisterServiceWorkers()
   })
 
+  it.only('shows the version number in the footer', function () {
+    cy.visit('/');
+
+    cy.get('footer')
+      .contains(/cree-sro-syllabics\s+v\d{4}[.]\d{1,2}[.]\d{1,2}\b/);
+  });
+
   it('transcribes SRO to syllabics', function () {
     cy.visit('/');
 

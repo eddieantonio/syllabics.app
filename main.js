@@ -44,6 +44,7 @@ function initializeApplication() {
   const hkFinalButtons = document.getElementsByName('final-hk');
   const clearButton = document.getElementsByName('clear')[0];
   const settingsBox = document.getElementById('settings');
+  const libraryVersion = document.getElementById('library-version');
 
   // Keeps the previous value of the textbox. Used for checking if a vowel was
   // typed twice.
@@ -89,6 +90,9 @@ function initializeApplication() {
     // Do that first!
     updateTextareasUsingFragment();
     previousSROText = sroBox.value;
+
+    // Finally, put the library version in the footer:
+    libraryVersion.innerHTML = CreeSROSyllabics.version.toString();
   }
 
   /**
