@@ -98,13 +98,9 @@ function initializeApplication() {
   }
 
   function setupPage() {
-    // Convert "dirty" changes soon as the page is loaded.
-    if (dirty == 'sro') {
-      sendSRO();
-    } else if (dirty == 'syl') {
-      sendSyllabics();
-    }
-
+    // There might be text in the #!fragment that needs to be converted.
+    // Do that first!
+    updateTextareasUsingFragment();
     previousSROText = sroBox.value;
   }
 
@@ -274,17 +270,9 @@ function initializeApplication() {
  * appropriately.
  */
 function updateNamedTextareaUsingFragment(name) {
-  var textarea = document.getElementById(name);
+  // no-op: this functionality is now done in setupPage();
 
-  if (name !== 'sro' && name !== 'syl') {
-    return;
-  }
-
-  var fragment = parseFragment();
-  if (fragment[name]) {
-    dirty = name;
-    textarea.value = fragment[name];
-  }
+  // TODO: delete this function
 };
 
 ///////////////////////////// Utility functions //////////////////////////////
