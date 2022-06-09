@@ -106,27 +106,6 @@ function initializeApplication() {
     previousSROText = newSROText;
   });
 
-  /**
-   * Returns the last character of a string.
-   */
-  function lastCharOf(string) {
-    return string[string.length - 1];
-  }
-
-  /**
-   * Returns the index of the first position that two strings differ.
-   */
-  function whereDiffer(prev, current) {
-    var i;
-    for (i = 0; i < prev.length; i++) {
-      if (prev[i] !== current[i]) {
-        return i;
-      }
-    }
-    // They must differ at the last position!
-    return i;
-  }
-
   // Send the appropriate request when the user types or pastes into the SRO
   // or syllabics boxes, respectively.
   sroBox.addEventListener('input', sendSROFromEvent);
@@ -222,16 +201,6 @@ function initializeApplication() {
   }
 
   /**
-   * (for the purposes of conversion) can we ignore this key event?
-   */
-  function isIgnorableKey(event) {
-    // if event.key is missing...?
-    // OR if event.key is something like "Space", "Meta", or something like
-    // "ArrowRight", instead of a single character.
-    return !event.key || event.key.length > 1;
-  }
-
-  /**
    * Return the long version of a short vowel.
    */
   function longVowelOf(vowel) {
@@ -242,17 +211,11 @@ function initializeApplication() {
       throw new RangeError('Invalid long vowel: ' + vowel);
     }
 
+    // TODO: refactor: replace conditional with polymorphism
     let accentedVowels = shouldProduceMacrons()
       ? 'ēīōā'
       : 'êîôâ';
     return accentedVowels[index];
-  }
-
-  /**
-   * Return true if the letter is a short vowel that can have a long accent.
-   */
-  function isSROShortVowel(letter) {
-    return letter === 'e' || letter === 'i' || letter === 'o' || letter === 'a';
   }
 
   /**
@@ -288,7 +251,6 @@ function updateNamedTextareaUsingFragment(name) {
   }
 };
 
-
 ///////////////////////////// Utility functions //////////////////////////////
 
 /**
@@ -319,4 +281,42 @@ function parseFragment() {
   });
 
   return pairs;
+}
+
+/**
+ * Returns the last character (actually, UTF-16 code unit 🙄) of a string.
+ */
+function lastCharOf(string) {
+  return string[string.length - 1];
+}
+
+/**
+ * Returns the index of the first position that two strings differ.
+ */
+function whereDiffer(prev, current) {
+  var i;
+  for (i = 0; i < prev.length; i++) {
+    if (prev[i] !== current[i]) {
+      return i;
+    }
+  }
+  // They must differ at the last position!
+  return i;
+}
+
+/**
+ * (for the purposes of conversion) can we ignore this key event?
+ */
+function isIgnorableKey(event) {
+  // if event.key is missing...?
+  // OR if event.key is something like "Space", "Meta", or something like
+  // "ArrowRight", instead of a single character.
+  return !event.key || event.key.length > 1;
+}
+
+/**
+ * Return true if the letter is a short vowel that can have a long accent.
+ */
+function isSROShortVowel(letter) {
+  return letter === 'e' || letter === 'i' || letter === 'o' || letter === 'a';
 }
