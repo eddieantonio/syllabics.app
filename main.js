@@ -56,6 +56,7 @@ function initializeApplication() {
   const macronButtons = document.getElementsByName('macrons');
   const hkFinalButtons = document.getElementsByName('final-hk');
   const clearButton = document.getElementsByName('clear')[0];
+  const settingsBox = document.getElementById('settings');
 
   // Keeps the previous value of the textbox. Used for checking if a vowel was
   // typed twice.
@@ -96,10 +97,8 @@ function initializeApplication() {
 
   // Change the values when the /#!hash changes.
   window.onhashchange = function () {
-    var settingsBox;
     // Open the settings box if navigated to.
     if (location.hash === '#settings') {
-      settingsBox = document.getElementById('settings');
       settingsBox.open = true;
     }
 
