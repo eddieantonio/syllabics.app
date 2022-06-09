@@ -34,13 +34,6 @@ window.CREE_SRO_SYLLABICS_VERSION = CreeSROSyllabics.version.toString();
 window.updateNamedTextareaUsingFragment = updateNamedTextareaUsingFragment;
 
 
-////////////////////////////////// Globals ///////////////////////////////////
-
-/** global: whether there is text on the page during load that needs to be
-  * converted  */
-var dirty = null;
-
-
 //////////////////////////////////// Main ////////////////////////////////////
 
 document.addEventListener('DOMContentLoaded', initializeApplication);
