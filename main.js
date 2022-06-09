@@ -96,18 +96,11 @@ function initializeApplication() {
   })
 
   // Change the values when the /#!hash changes.
-  window.onhashchange = function () {
-    // Open the settings box if navigated to.
-    if (location.hash === '#settings') {
-      settingsBox.open = true;
-    }
-
-    updateTextareasUsingFragment();
-  };
+  window.onhashchange = handleHashChange;
 
   /**
    * Special handling for keypresses in the SRO box.
-   * 
+   *
    * Handles double-pressing vowels such that ii -> î.
    */
   function handleKeypressInSROBox(event) {
@@ -148,6 +141,19 @@ function initializeApplication() {
     }
 
     previousSROText = newSROText;
+  }
+
+  /**
+   * Does any tasks when the fragment/hash changes in the document.
+   */
+  function handleHashChange() {
+    // Ensure the settings box if navigated to.
+    if (location.hash === '#settings') {
+      settingsBox.open = true;
+    }
+
+    // Do any text conversions in the fragment.
+    updateTextareasUsingFragment();
   }
 
   /**
