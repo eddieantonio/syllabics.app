@@ -57,6 +57,8 @@ function initializeApplication() {
   const hkFinalButtons = document.getElementsByName('final-hk');
   const clearButton = document.getElementsByName('clear')[0];
 
+  // Keeps the previous value of the textbox. Used for checking if a vowel was
+  // typed twice.
   var previousSROText = sroBox.value;
 
   // Convert "dirty" changes soon as the page is loaded.
@@ -65,6 +67,8 @@ function initializeApplication() {
   } else if (dirty == 'syl') {
     sendSyllabics();
   }
+
+  // Register event handlers
 
   // Add a long vowel when double-pressing a vowel.
   sroBox.addEventListener('input', function (event) {
@@ -116,11 +120,12 @@ function initializeApplication() {
     macronButtons[i].addEventListener('input', sendSyllabicsFromEvent);
   }
 
-  // Recompute the syllabicsv when the final HK is toggled
+  // Recompute the syllabics when the final HK is toggled
   for (var i = 0; i < hkFinalButtons.length; i++) {
     hkFinalButtons[i].addEventListener('input', sendSROFromEvent);
   }
 
+  // Clear textboxes when the appropriate button is clicked
   clearButton.addEventListener('click', function () {
     sroBox.value = ''
     sylBox.value = ''
@@ -145,7 +150,7 @@ function initializeApplication() {
   };
 
   /**
-   * Updates which ever textbox needs updating.
+   * Updates whichever textbox needs updating.
    */
   function updateBoxes(data) {
     if (data.sro)
