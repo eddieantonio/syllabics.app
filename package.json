@@ -12,7 +12,7 @@
     "cree-sro-syllabics": "^2021.6.8"
   },
   "engines": {
-    "node": ">=18.0 <25"
+    "node": "22.x"
   },
   "devDependencies": {
     "cypress": "^6.9.1",
