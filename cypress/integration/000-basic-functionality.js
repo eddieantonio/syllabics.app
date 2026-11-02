@@ -6,7 +6,7 @@ describe('Basic functionality', function () {
     cy.unregisterServiceWorkers()
   })
 
-  it.only('shows the version number in the footer', function () {
+  it('shows the version number in the footer', function () {
     cy.visit('/');
 
     cy.get('footer')
@@ -127,6 +127,34 @@ describe('Basic functionality', function () {
       cy.get('textarea#syl')
         .invoke('val')
         .should('equal', '')
+    })
+  })
+
+  describe('the dialect feature', function () {
+    it('should transliterate <ý> according to dialect', function () {
+      cy.visit('/');
+
+      cy.get('[data-cy="settings-drop-down"]')
+        .click();
+      cy.get('[data-cy="option-th-dialect"]')
+        .should("be.visible")
+        .click();
+
+      cy.get('textarea#sro')
+        .clear()
+        .type("nehiýaw");
+
+      cy.get('textarea#syl')
+        .invoke('val')
+        .should('equal', 'ᓀᐦᐃᖬᐤ');
+
+      cy.get('[data-cy="option-n-dialect"]')
+        .should("be.visible")
+        .click();
+
+      cy.get('textarea#syl')
+        .invoke('val')
+        .should('equal', 'ᓀᐦᐃᓇᐤ');
     })
   })
 });
