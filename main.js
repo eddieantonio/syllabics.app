@@ -1,5 +1,5 @@
 /*!
- * Copyright (C) 2018–2022 Eddie Antonio Santos <hello@eddieantonio.ca>
+ * Copyright (C) 2018–2026 Eddie Antonio Santos <hello@eddieantonio.ca>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -33,6 +33,7 @@ function initializeApplication() {
   const sylBox = document.getElementById('syl');
   const doubledVowelCheckbox = document.getElementsByName('double-vowels')[0];
   const macronButtons = document.getElementsByName('macrons');
+  const dialectButtons = document.getElementsByName('dialect');
   const hkFinalButtons = document.getElementsByName('final-hk');
   const clearButton = document.getElementsByName('clear')[0];
   const settingsBox = document.getElementById('settings');
@@ -60,6 +61,11 @@ function initializeApplication() {
     // Recompute the SRO when the macron/circumflex switch is clicked
     for (var i = 0; i < macronButtons.length; i++) {
       macronButtons[i].addEventListener('input', sendSyllabicsFromEvent);
+    }
+
+    // Recompute the syllabics when the dialect is changed
+    for (var i = 0; i < dialectButtons.length; i++) {
+      dialectButtons[i].addEventListener('input', sendSROFromEvent);
     }
 
     // Recompute the syllabics when the final HK is toggled
@@ -188,12 +194,23 @@ function initializeApplication() {
   }
 
   /**
+   * @returns {'y' | 'th' | 'n'} which dialect to convert <ý>
+   */
+  function getDialect() {
+    var button = document.querySelector('input[name="dialect"]:checked');
+    var value = button.value
+    console.assert(value === "y" || value === "th" || value == "n", "unexpected value: " + value);
+    return value;
+  }
+
+  /**
    * Convert SRO to syllabics and show conversion.
    */
   function sendSRO() {
     send({
       syl: CreeSROSyllabics.sro2syllabics(sroBox.value, {
-        finalHK: getHKStyle()
+        finalHK: getHKStyle(),
+        dialect: getDialect(),
       })
     });
   }

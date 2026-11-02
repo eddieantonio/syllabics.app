@@ -1,6 +1,6 @@
 {
   "name": "syllabics.app",
-  "version": "2019.1.5",
+  "version": "2026.11.2",
   "author": "Eddie Antonio Santos <hello@eddieantonio.ca>",
   "description": "Western Cree SRO/Syllabics conversion app",
   "private": true,
@@ -9,7 +9,7 @@
     "url": "https://github.com/eddieantonio/syllabics.app.git"
   },
   "dependencies": {
-    "cree-sro-syllabics": "^2021.6.8"
+    "cree-sro-syllabics": "^2026.11.2"
   },
   "devDependencies": {
     "cypress": "^6.9.1",
